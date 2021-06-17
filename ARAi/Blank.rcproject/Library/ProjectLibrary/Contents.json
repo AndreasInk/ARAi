@@ -1,0 +1,32 @@
+[
+  {
+    "libraryIdentifier" : "8b1330ce7ae5b3bd06accda23f1162f9",
+    "format" : "model",
+    "displayName" : "Broccli.usdz"
+  },
+  {
+    "libraryIdentifier" : "f986873a31beb0ddcccabd105a82bff9",
+    "format" : "model",
+    "displayName" : "pizza.usdz"
+  },
+  {
+    "libraryIdentifier" : "deb445ba776594d9f7b7562e9e72f17a",
+    "format" : "model",
+    "displayName" : "wipes.usdz"
+  },
+  {
+    "libraryIdentifier" : "61632abec58228b6a05ba662af4ec80f",
+    "format" : "model",
+    "displayName" : "tolietpaper.usdz"
+  },
+  {
+    "libraryIdentifier" : "89d026a0b1492b9b131bc54d09a47e88",
+    "format" : "model",
+    "displayName" : "banana.usdz"
+  },
+  {
+    "libraryIdentifier" : "76d660c7c23252cfb15bda23d8b25c89",
+    "format" : "model",
+    "displayName" : "result.usdz"
+  }
+]

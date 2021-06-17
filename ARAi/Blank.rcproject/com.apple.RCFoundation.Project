@@ -1,0 +1,101 @@
+{
+  "__content" : [
+    {
+      "scenes" : [
+        {
+          "__content" : [
+            {
+              "arAnchorSpecification" : {
+                "alignment" : "horizontal",
+                "name" : "surface"
+              },
+              "behaviors" : [
+
+              ],
+              "gravity" : [
+                0,
+                -9.8000001907348633,
+                0
+              ],
+              "identifier" : "FD4D892D-716A-47AA-92D7-0AA348BAD6AA",
+              "material" : "concrete",
+              "overrides" : {
+                "children" : {
+                  "2A03F334-E0E0-474C-850E-D306F5FFA174" : null,
+                  "2A8A364B-273F-4395-B918-B7A58CB91D71" : null,
+                  "4AFD87C1-C12E-4E3A-830B-00C18DD46B87" : null,
+                  "6E19308C-F7A7-4A56-80E4-79971B0000F4" : null,
+                  "8DB458A1-F22D-440D-92CE-9F2FBDD4F174" : null,
+                  "17B625DB-BB30-487E-8568-13BF4F902C6E" : null,
+                  "E08890BE-A9AC-4E3D-87FF-A159510C7293" : null
+                },
+                "factory" : null,
+                "runtimeAttributes" : [
+                  [
+                    "isAccessibilityEnabled",
+                    {
+                      "typeName" : "Bool",
+                      "value" : false
+                    }
+                  ]
+                ]
+              },
+              "physicsMode" : "grid",
+              "title" : "Scene",
+              "viewTransform" : {
+                "cameraTransform" : [
+                  0.080783791840076447,
+                  -8.3001090445122827e-09,
+                  0.99673163890838623,
+                  0,
+                  0.39112019538879395,
+                  0.91979348659515381,
+                  -0.031699776649475098,
+                  0,
+                  -0.91678726673126221,
+                  0.39240261912345886,
+                  0.074304454028606415,
+                  0,
+                  -5.9736409187316895,
+                  2.3905346393585205,
+                  2.1322038173675537,
+                  1
+                ],
+                "sceneTransform" : [
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            }
+          ],
+          "__version" : 5
+        }
+      ],
+      "tags" : {
+        "__content" : [
+          {
+            "tagsStore" : {
+
+            }
+          }
+        ],
+        "__version" : 1
+      }
+    }
+  ],
+  "__version" : 1
+}
