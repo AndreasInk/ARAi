@@ -14,7 +14,6 @@ struct CameraView: View {
     
     @StateObject var model = CameraViewModel()
     @State private var showInfo: Bool = true
-    @State private var instruct: Bool = false
     let aspectRatio: CGFloat = 4.0 / 3.0
     let previewCornerRadius: CGFloat = 15.0
     @ObservedObject var userData: UserData
@@ -29,7 +28,7 @@ struct CameraView: View {
                     Color.black.edgesIgnoringSafeArea(.all)
                         .onAppear() {
                             //camera = false
-                            instruct = true
+                           // instruct = true
                             //choosenFolder = model.captureDir ?? Bundle.main.url(forResource: "Banana", withExtension: "reality")!
                         }
                     // Center the preview view vertically. Place a clip frame
@@ -69,8 +68,8 @@ struct CameraView: View {
             .navigationBarTitle("Scan")
             .navigationBarHidden(true)
             .navigationBarTitleDisplayMode(.inline)
-            .sheet(isPresented: $instruct) {
-                OnboardingView(onboardingViews: [Onboarding(id: UUID(), image: "scan", title: "Photo Time!", description: "Take photos of an object with each photo overlaping."), Onboarding(id: UUID(), image: "scan", title: "Upload Your Photos", description: "Once you've taken at least 20 photos, tap the photo preview in the bottom left, then tap upload and follow the instructions on the next view.")],isOnboarding: $instruct, isOnboarding2: $instruct, userData: userData)
+            .sheet(isPresented: $userData.instruct) {
+                OnboardingView(onboardingViews: [Onboarding(id: UUID(), image: "scan", title: "Photo Time!", description: "Take photos of an object with each photo overlaping."), Onboarding(id: UUID(), image: "scan", title: "Upload Your Photos", description: "Once you've taken at least 20 photos, tap the photo preview in the bottom left, then tap upload and follow the instructions on the next view.")],isOnboarding: $userData.instruct, isOnboarding2: $userData.instruct, userData: userData)
             }
           
         }

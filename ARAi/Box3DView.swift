@@ -38,10 +38,10 @@ struct Box3DView: View {
             self.orangeDegree = 90
             self.orangeOffset = -90
           }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            //DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             withAnimation(.linear(duration: 10)) {
                 addToScale = Double(CGFloat.random(in: 0.4...1.0))
-            }
+            //}
           }
       }
       ZStack {

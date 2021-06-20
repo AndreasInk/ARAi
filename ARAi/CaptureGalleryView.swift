@@ -189,7 +189,11 @@ struct CaptureGalleryView: View {
                 } .buttonStyle(CTAButtonStyle2())
                 }
             } .sheet(isPresented: $upload) {
-                UploadView(userData: userData, model: model, captureFolderState: captureFolderState, categories: $categories, upload: $upload)
+                UploadViewV2(timer: SimpleTimer(interval: 5) {
+                    
+                }, timerQueue: SimpleTimer(interval: 5) {
+                    
+                }, userData: userData, model: model, captureFolderState: captureFolderState, categories: $categories, upload: $upload)
             }
         }
         

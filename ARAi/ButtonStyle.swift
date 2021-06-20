@@ -45,12 +45,12 @@ struct CTAButtonStyle3: ButtonStyle {
                     bolded = true
                         }
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    //DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     
                         withAnimation(.easeOut(duration: 0.2)) {
                             move = true
                             
-                        }
+                        //}
                     }
                     } else {
                         
@@ -59,12 +59,12 @@ struct CTAButtonStyle3: ButtonStyle {
                         bolded = false
                             }
                         
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                       // DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         
                             withAnimation(.easeOut(duration: 0.2)) {
                                 move = false
                                 
-                            }
+                          //  }
                         }
                     }
                    
@@ -89,12 +89,12 @@ struct CTAButtonStyle3: ButtonStyle {
                     }
                 
                 if bolded {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                //DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 
                     withAnimation(.easeOut(duration: 0.2)) {
                         move = true
                         
-                    }
+                 //   }
                 }
                 }
                     
@@ -148,12 +148,12 @@ struct CTAButtonStyle2: ButtonStyle {
                     bolded = true
                         }
                     
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) {
+                       // DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) {
                     
                         withAnimation(.easeOut(duration: 0.2)) {
                             move = true
                             
-                        }
+                       // }
                     }
                     } else {
                         
@@ -162,12 +162,12 @@ struct CTAButtonStyle2: ButtonStyle {
                         bolded = false
                             }
                         
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                       // DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         
                             withAnimation(.easeOut(duration: 0.2)) {
                                 move = false
                                 
-                            }
+                         //   }
                         }
                     }
                    
@@ -201,12 +201,12 @@ struct CTAButtonStyle2: ButtonStyle {
                     }
                 
                 if bolded {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+              //  DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 
                     withAnimation(.easeOut(duration: 0.2)) {
                         move = true
                         
-                    }
+                //    }
                 }
                 }
                     

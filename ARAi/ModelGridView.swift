@@ -16,7 +16,7 @@ struct ModelGridView: View {
     @State var entities = [Entity]()
     @State private var ready = false
     @ObservedObject var userData: UserData
-    @ObservedObject var modelLoader: ModelLoader
+    
     @State private var scan = false
     @State private var showError = false
     @State private var destination = Bundle.main.url(forResource: "Banana", withExtension: "reality")!
@@ -32,13 +32,7 @@ struct ModelGridView: View {
                        
                     }
             
-            if preload {
-            ARQuickLookView(name: destination.path)
-                    .ignoresSafeArea()
-                    .onAppear() {
-                        preload = false
-                    }
-                    }
+           
               
             if category.items.isEmpty {
                 VStack {
@@ -74,6 +68,13 @@ struct ModelGridView: View {
 //                    }
 //                }
             } else {
+                if preload {
+                ARQuickLookView(name: destination.path)
+                        .ignoresSafeArea()
+                        .onAppear() {
+                            preload = false
+                        }
+                        }
                 ScrollView( showsIndicators: false) {
                     LazyVGrid(columns: columns, spacing: 5) {
             ForEach(category.items, id: \.id) { item in
@@ -105,10 +106,8 @@ struct ModelGridView: View {
                         ready = true
                         
                     }
-                
-                .sheet(isPresented: $ready) {
-                    ZStack {
-                     
+                NavigationLink(destination: ZStack {
+                    
                     
                     ARQuickLookView(name: destination.path)
                             .ignoresSafeArea()
@@ -160,8 +159,13 @@ struct ModelGridView: View {
                                
                             Spacer()
                     }
-                   // ARHomeView(item: $item, category: $category, userData: userData, destination: $destination, modelLoader: modelLoader)
-                }
+                   // ARHomeView(item: $item, category: $category, userData: userData, destination: $destination)
+                },
+                               isActive: self.$ready) {
+                    
+                
+               
+                    
                 }
 //                .sheet(isPresented: $modelLoader.loading) {
 //                    VStack {

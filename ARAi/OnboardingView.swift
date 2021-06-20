@@ -44,7 +44,7 @@ struct OnboardingView: View {
                         .font(.custom("Karla-Medium", size: 18, relativeTo: .headline))
                         .foregroundColor(.white)
                 }
-            } //.buttonStyle(CTAButtonStyle())
+            }  .buttonStyle(CTAButtonStyle())
             }
             Button(action: {
                 if onboardingViews[slideNum].title.contains("Noti") {
@@ -67,7 +67,7 @@ struct OnboardingView: View {
                        
                         
                 }
-            } .buttonStyle(CTAButtonStyle2())
+            }  .buttonStyle(CTAButtonStyle2())
             
         }
     }

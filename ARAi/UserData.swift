@@ -46,6 +46,8 @@ final class UserData: ObservableObject {
   
     var reload = 0
     
+    var instruct = true
+    
 }
 
 import Foundation
@@ -77,17 +79,4 @@ extension Published {
         }))
     }
     
-}
-extension Array where Element:Equatable {
-    func removeDuplicates() -> [Element] {
-        var result = [Element]()
-
-        for value in self {
-            if result.contains(value) == false {
-                result.append(value)
-            }
-        }
-
-        return result
-    }
 }

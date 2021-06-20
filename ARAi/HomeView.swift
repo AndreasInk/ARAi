@@ -18,7 +18,7 @@ struct HomeView: View {
     //[Item(id: UUID(), name: "Bannana", description: "It's a fruit!", progress: 0.0, result: Data()), Item(id: UUID(), name: "Apple", description: "It's a fruit!", progress: 0.0, result: Data()), Item(id: UUID(), name: "Orange", description: "It's a fruit!", progress: 0.0, result: Data()), Item(id: UUID(), name: "Blueberries", description: "It's a fruit!", progress: 0.0, result: Data())])
     @ObservedObject var userData: UserData
     @State var entities = [Entity]()
-    @ObservedObject var modelLoader: ModelLoader
+   
     @Environment(\.presentationMode) private var presentation
     var body: some View {
         NavigationView { [presentation] in
@@ -103,7 +103,8 @@ struct HomeView: View {
                                 }
                                 
                             }
-                    categories[i].items = categories[i].items.removeDuplicates()
+                    #warning("causing issue?")
+                   // categories[i].items = categories[i].items.removeDuplicates()
                     for i in category.items.indices {
                         if category.name == "Your Models" {
 //                        if category.items[i].result.isEmpty {
@@ -170,7 +171,7 @@ struct HomeView: View {
                         }
         
                     
-                ModelGridView(category: $category, entities: entities, userData: userData, modelLoader: ModelLoader())
+            ModelGridView(category: $category, entities: entities, userData: userData)
              //  
         } .navigationBarHidden(true)
               //
