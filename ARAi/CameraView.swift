@@ -20,6 +20,7 @@ struct CameraView: View {
     @Binding var camera: Bool
     @State var useless = false
     @State var show = false
+    @State var instruct = true
     var body: some View {
         NavigationView {
             GeometryReader { geometryReader in
@@ -68,8 +69,11 @@ struct CameraView: View {
             .navigationBarTitle("Scan")
             .navigationBarHidden(true)
             .navigationBarTitleDisplayMode(.inline)
-            .sheet(isPresented: $userData.instruct) {
-                OnboardingView(onboardingViews: [Onboarding(id: UUID(), image: "scan", title: "Photo Time!", description: "Take photos of an object with each photo overlaping."), Onboarding(id: UUID(), image: "scan", title: "Upload Your Photos", description: "Once you've taken at least 20 photos, tap the photo preview in the bottom left, then tap upload and follow the instructions on the next view.")],isOnboarding: $userData.instruct, isOnboarding2: $userData.instruct, userData: userData)
+            .sheet(isPresented: $instruct) {
+                OnboardingView(onboardingViews: [Onboarding(id: UUID(), image: "scan", title: "Photo Time!", description: "Take photos of an object with each photo overlaping."), Onboarding(id: UUID(), image: "scan", title: "Upload Your Photos", description: "Once you've taken at least 20 photos, tap the photo preview in the bottom left, then tap upload and follow the instructions on the next view.")],isOnboarding: $instruct, isOnboarding2: $instruct, userData: userData)
+                    .onChange(of: instruct) { value in
+                        userData.instruct = value
+                    }
             }
           
         }

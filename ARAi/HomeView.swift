@@ -56,13 +56,13 @@ struct HomeView: View {
                     }
                 }
                 .onAppear() {
-//                    do {
-//                        if !getDocumentsDirectory().appendingPathComponent("x.png").isFileURL {
-//                    try UIImage(systemName: "xmark")?.pngData()?.write(to: getDocumentsDirectory().appendingPathComponent("x.png"))
-//                        }
-//                    } catch {
-//                        
-//                    }
+                    do {
+                        if !getDocumentsDirectory().appendingPathComponent("x.png").isFileURL {
+                    try UIImage(systemName: "xmark")?.pngData()?.write(to: getDocumentsDirectory().appendingPathComponent("x.png"))
+                        }
+                    } catch {
+                        
+                    }
                     
                     let url = self.getDocumentsDirectory().appendingPathComponent("categories.txt")
                     do {
@@ -105,47 +105,24 @@ struct HomeView: View {
                             }
                     #warning("causing issue?")
                    // categories[i].items = categories[i].items.removeDuplicates()
-                    for i in category.items.indices {
-                        if category.name == "Your Models" {
-//                        if category.items[i].result.isEmpty {
-//                    let storage = Storage.storage()
-//                    let storageRef = storage.reference()
-//                    let path = userData.userID + "/" + category.items[i].id.uuidString + "/"
-//                    let riversRef = storageRef.child(path + "\(category.items[i].id).png")
-//                    
-//                     // You can also access to download URL after upload.
-//                     riversRef.downloadURL { (url, error) in
-//                       guard let downloadURL = url else {
-//                        
-//                           ///AA9C5572-6824-4547-96E9-CC21BC5E8DBA
-//                         return print("error")
-//                       }
-//                         withAnimation(.easeInOut) {
-//                         let imgData = UIImage(contentsOfFile: downloadURL.absoluteString)
-//                         category.items[i].result = imgData?.pngData() ?? Data()
-//                     }
-//                     }
-//                    
-//                        }
-                        }
-                }
+                
                     category = categories.first ?? category
-                    for i in categories.indices {
-                        for i2 in categories[i].items.indices {
-                        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-                  let destination = documents.appendingPathComponent("\(categories[i].items[i2].id).png")
-                       
-                        if categories[i].name == "Your Models" {
-                        if categories[i].items[i2].result.isEmpty {
-                            
-                                
-                   
-                        
-
-                }
-                        }
-                        }
-                    }
+//                    for i in categories.indices {
+//                        for i2 in categories[i].items.indices {
+//                        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+//                  let destination = documents.appendingPathComponent("\(categories[i].items[i2].id).png")
+//
+//                        if categories[i].name == "Your Models" {
+//                        if categories[i].items[i2].result.isEmpty {
+//
+//
+//
+//
+//
+//                }
+//                        }
+//                        }
+//                    }
                 }
             SearchBarView(categories: $categories, category: $category)
             CategoryView(categories: $categories, pickedCategory: $category)

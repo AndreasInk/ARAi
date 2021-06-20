@@ -27,12 +27,12 @@ class RestManager {
     func makeRequest(toURL url: URL,
                      withHttpMethod httpMethod: HttpMethod,
                      completion: @escaping (_ result: Results) -> Void) {
-        #warning("was weak")
-        DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
-            let targetURL = self.addURLQueryParameters(toURL: url)
-            let httpBody = self.getHttpBody()
+        
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            let targetURL = self?.addURLQueryParameters(toURL: url)
+            let httpBody = self?.getHttpBody()
             
-            guard let request = self.prepareRequest(withURL: targetURL, httpBody: httpBody, httpMethod: httpMethod) else
+            guard let request = self?.prepareRequest(withURL: targetURL, httpBody: httpBody, httpMethod: httpMethod) else
             {
                 completion(Results(withError: CustomError.failedToCreateRequest))
                 return

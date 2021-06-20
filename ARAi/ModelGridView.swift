@@ -75,8 +75,9 @@ struct ModelGridView: View {
                             preload = false
                         }
                         }
+            
                 ScrollView( showsIndicators: false) {
-                    LazyVGrid(columns: columns, spacing: 5) {
+                    VStack {
             ForEach(category.items, id: \.id) { item in
 //                if item.progress == 1 {
              
@@ -106,11 +107,19 @@ struct ModelGridView: View {
                         ready = true
                         
                     }
-                NavigationLink(destination: ZStack {
+                Button(action: {
                     
+                }) {
+                }
+                .sheet(isPresented: $ready) {
+                    ZStack {
+                     
                     
                     ARQuickLookView(name: destination.path)
                             .ignoresSafeArea()
+                            .onDisappear() {
+                               
+                            }
                         VStack {
                             HStack {
                                 
@@ -159,14 +168,12 @@ struct ModelGridView: View {
                                
                             Spacer()
                     }
-                   // ARHomeView(item: $item, category: $category, userData: userData, destination: $destination)
-                },
-                               isActive: self.$ready) {
-                    
-                
-               
-                    
+                   
                 }
+                    
+                   // ARHomeView(item: $item, category: $category, userData: userData, destination: $destination)
+                }
+                
 //                .sheet(isPresented: $modelLoader.loading) {
 //                    VStack {
 //                        Text("Loading Model")
@@ -208,7 +215,7 @@ struct ModelGridView: View {
                        
                         .animation(nil)
             }// .id(UUID())
-            
+                
 }
         }
     }
