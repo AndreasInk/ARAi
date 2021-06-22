@@ -1449,6 +1449,52 @@ struct UploadViewV2: View {
                         
                         
                         }
+                        let url = self.getDocumentsDirectory().appendingPathComponent("categories.txt")
+                                                                 do {
+                       
+                                                                     let input = try String(contentsOf: url)
+                       
+                       
+                                                                     let jsonData = Data(input.utf8)
+                       
+                                                                         let decoder = JSONDecoder()
+                       
+                       
+                                                                             let note = try decoder.decode([Category].self, from: jsonData)
+                                                                             categories = note
+                       
+                       
+                                                                             //                                if i.first!.id == "1" {
+                                                                             //                                    notes.removeFirst()
+                                                                             //                                }
+                       
+                       
+                                                                         } catch {
+                                                                             print(error.localizedDescription)
+                                                                         }
+                                               let index = categories.firstIndex(where: { $0.name == "Your Models" })
+                                                                          categories[index ?? 0].items.append(item)
+                                               let encoder = JSONEncoder()
+                       
+                                               if let encoded = try? encoder.encode(categories) {
+                                                   if let json = String(data: encoded, encoding: .utf8) {
+                       
+                                                       do {
+                                                           let url = self.getDocumentsDirectory().appendingPathComponent("categories.txt")
+                                                           try json.write(to: url, atomically: false, encoding: String.Encoding.utf8)
+                                                           if let image = UIImage(contentsOfFile: captureFolderState.captures.last?.imageUrl.path ?? getDocumentsDirectory().appendingPathComponent("x.png").path) {
+                                                               if let data = image.pngData() {
+                                                                   let filename = getDocumentsDirectory().appendingPathComponent("\(item.id).png")
+                                                                   try? data.write(to: filename)
+                       
+                                                               }
+                       
+                                                           }
+                                                       } catch {
+                                                           print("erorr")
+                                                       }
+                                                   }
+                                               }
                     }
                 Text("We did it! Remember, if the scan did not appear as expected, you can always take more photos and reupload for free.  Please keep in mind, iPhone's 11 and newer iPad Pro's produce better results.")
                     .font(.custom("Karla-Medium", size: 20, relativeTo: .headline))
@@ -1597,16 +1643,23 @@ ProgressView(value: progress)
                          let note = try decoder.decode(Queue.self, from: data2)
                      queue = note
                      if note.queue.first == userID {
+                         timerQueue.cancel()
+                         #warning("disabled")
+                        // DispatchQueue.main.asyncAfter(deadline: .now() + 30.0) {
                          timer.start()
                          let imgs = captureFolderState.captures.map{ $0.imageUrl }
                          let gravities = captureFolderState.captures.map{ $0.gravityUrl }
-                             timerQueue.cancel()
-                             for i in imgs.indices {
-                                 uploadMultipleFiles(urls: [imgs[i], gravities[i]], i: i)
-                             }
-                         
-                         sendPrint(text: "Uploading Images")
-                    
+                         #warning("disabled")
+                            // for i in imgs.indices {
+                         var pairs = [PairOfData]()
+                         for i in imgs.indices {
+                             pairs.append(PairOfData(id: UUID().uuidString, img: imgs[i], gravity: gravities[i]))
+                         }
+                                 uploadMultipleFiles(urls: pairs)
+                             //}
+                         sendPrint(text: "Uploaded Images")
+                      
+                       //  }
                         
                      } else {
                          let index = note.queue.firstIndex(where: { $0 == userID })
@@ -1671,7 +1724,7 @@ ProgressView(value: progress)
     func getUSDZ(id: String) {
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(30)) {
         print("getting usdz")
-        let url2 = URL(string: "https://araiapi.herokuapp.com/getImage/?id=\(id).usdz")
+        let url2 = URL(string: "https://araiapi.herokuapp.com/getUSDZ/?id=\(id).usdz")
          if let url = url2 {
        
              let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
@@ -1737,7 +1790,7 @@ ProgressView(value: progress)
     func sendPrint(text: String) {
         let text2 = text.replacingOccurrences(of: " ", with: "--").replacingOccurrences(of: "/", with: "").replacingOccurrences(of: "\"", with: "")
         
-        if  let url = URL(string: "https://araiapi.herokuapp.com/printNow/?print=\(text2)") {
+        if  let url = URL(string: "https://araiapi.herokuapp.com/printNowMac/?print=\(text2)") {
             let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
                 
                 
@@ -1747,61 +1800,44 @@ ProgressView(value: progress)
         }
         
     }
-    func uploadMultipleFiles(urls: [URL], i: Int) {
-          var infos = [RestManager.FileInfo]()
-          for url in urls {
+    func uploadMultipleFiles(urls: [PairOfData]) {
+         
+        for i in urls.indices {
   
-             let uuid = String(i)
+            var infos = [RestManager.FileInfo]()
               var newURL = self.getDocumentsDirectory().appendingPathComponent(String(i) + ".HEIC")
-              if url.lastPathComponent.contains("HEIC") {
+            if urls[i].img.lastPathComponent.contains("HEIC") {
   
               do {
-                  try UIImage(contentsOfFile: url.path)?.pngData()!.write(to: newURL)
-                  let imageFileInfo = RestManager.FileInfo(withFileURL: url, filename: String(i) + ".HEIC", name: "uploadedFile", mimetype: "image/HEIC")
+                  try UIImage(contentsOfFile: urls[i].img.path)?.pngData()!.write(to: newURL)
+                  let imageFileInfo = RestManager.FileInfo(withFileURL: urls[i].img, filename: String(i) + ".HEIC", name: "uploadedFile", mimetype: "image/HEIC")
                   infos.append(imageFileInfo)
               } catch {
   
               }
-              } else if url.lastPathComponent.lowercased().contains("txt") {
+              } else if urls[i].gravity.lastPathComponent.lowercased().contains("txt") {
                    newURL = self.getDocumentsDirectory().appendingPathComponent(String(i) + ".txt")
                   do {
-                      try Data(contentsOf: url).write(to: newURL)
+                      try Data(contentsOf: urls[i].gravity).write(to: newURL)
                       let imageFileInfo = RestManager.FileInfo(withFileURL: newURL, filename: String(i) + ".txt", name: "uploadedFile", mimetype: "text/plain")
                       infos.append(imageFileInfo)
                   } catch {
   
                   }
               } else {
-                  newURL = self.getDocumentsDirectory().appendingPathComponent(String(i) + ".TIFF")
-                 do {
-                     try Data(contentsOf: url).write(to: newURL)
-                     let imageFileInfo = RestManager.FileInfo(withFileURL: newURL, filename: String(i) + ".TIFF", name: "uploadedFile", mimetype: "image/tiff")
-                     infos.append(imageFileInfo)
-                 } catch {
-  
-                 }
+                 
               }
-  
-          }
-  
-  
-          upload(files: infos, toURL: URL(string: "https://araiapi.herokuapp.com/multiupload/")) { (success) -> Void in
-              if success {
-  
-  
-                 // captureFolderState.captures = []
-                  //captureFolderState.requestLoad()
-              }
-          }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            sendPrint(text: "Uploaded Images \(Int.random(in: 0...10))")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-                sendPrint(text: "Uploaded Images \(Int.random(in: 0...10))")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
-                    sendPrint(text: "Uploaded Images \(Int.random(in: 0...10))")
+            upload(files: infos, toURL: URL(string: "https://araiapi.herokuapp.com/multiupload/")) { (success) -> Void in
+                if success {
+    
+    
+                   // captureFolderState.captures = []
+                    //captureFolderState.requestLoad()
                 }
             }
-        }
+          }
+  
+  
       }
   
   
@@ -1850,4 +1886,9 @@ ProgressView(value: progress)
 struct Print: Decodable, Hashable {
     var id: String
     var process: String
+}
+struct PairOfData {
+    var id: String
+    var img: URL
+    var gravity: URL
 }

@@ -62,7 +62,6 @@
 		ED252D1A267B978F00846256 /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED252CE0267B978500846256 /* StoreView.swift */; };
 		ED252D1B267B978F00846256 /* ModelItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED252CE1267B978500846256 /* ModelItemView.swift */; };
 		ED252D1C267B978F00846256 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED252CE2267B978500846256 /* UserData.swift */; };
-		ED252D1D267B978F00846256 /* Blank.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = ED252CE3267B978D00846256 /* Blank.rcproject */; };
 		ED252D1E267B978F00846256 /* LeadingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED252CE4267B978D00846256 /* LeadingTextView.swift */; };
 		ED252D1F267B978F00846256 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED252CE5267B978D00846256 /* SearchBarView.swift */; };
 		ED252D20267B978F00846256 /* RestManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED252CE6267B978D00846256 /* RestManger.swift */; };
@@ -112,6 +111,7 @@
 		E1785247267B9C7800908D06 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E1DA5985267D498000ACD520 /* UploadViewV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewV2.swift; sourceTree = "<group>"; };
 		E1DA5987267D4DCD00ACD520 /* SimpleTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTimer.swift; sourceTree = "<group>"; };
+		E1F19B292681999200E64359 /* Blank.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Blank.rcproject; sourceTree = "<group>"; };
 		ED252C7F267B975E00846256 /* ARAi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARAi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED252C82267B975E00846256 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED252C84267B975E00846256 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -170,7 +170,6 @@
 		ED252CE0267B978500846256 /* StoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
 		ED252CE1267B978500846256 /* ModelItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelItemView.swift; sourceTree = "<group>"; };
 		ED252CE2267B978500846256 /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
-		ED252CE3267B978D00846256 /* Blank.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Blank.rcproject; sourceTree = "<group>"; };
 		ED252CE4267B978D00846256 /* LeadingTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeadingTextView.swift; sourceTree = "<group>"; };
 		ED252CE5267B978D00846256 /* SearchBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		ED252CE6267B978D00846256 /* RestManger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestManger.swift; sourceTree = "<group>"; };
@@ -270,7 +269,7 @@
 				ED252CD9267B978400846256 /* ARViewContainer.swift */,
 				ED252CB9267B977B00846256 /* AsyncImageHelpers.swift */,
 				ED252CB4267B977A00846256 /* Banana.reality */,
-				ED252CE3267B978D00846256 /* Blank.rcproject */,
+				E1F19B292681999200E64359 /* Blank.rcproject */,
 				ED252CBE267B977B00846256 /* Box3DView.swift */,
 				ED252CB3267B977900846256 /* Broccoli.reality */,
 				ED252CEB267B978E00846256 /* Burger.reality */,
@@ -526,7 +525,6 @@
 				ED252D04267B978F00846256 /* CategoryItemView.swift in Sources */,
 				ED252C83267B975E00846256 /* AppDelegate.swift in Sources */,
 				ED252CF4267B978F00846256 /* SettingsView.swift in Sources */,
-				ED252D1D267B978F00846256 /* Blank.rcproject in Sources */,
 				E1DA5988267D4DCD00ACD520 /* SimpleTimer.swift in Sources */,
 				ED252D1F267B978F00846256 /* SearchBarView.swift in Sources */,
 				ED252CF7267B978F00846256 /* ARQuickLook.swift in Sources */,
@@ -737,7 +735,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 56;
+				CURRENT_PROJECT_VERSION = 58;
 				DEVELOPMENT_ASSET_PATHS = "\"ARAi/Preview Content\"";
 				DEVELOPMENT_TEAM = 9NG3C5HP77;
 				ENABLE_PREVIEWS = YES;
@@ -759,7 +757,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 56;
+				CURRENT_PROJECT_VERSION = 58;
 				DEVELOPMENT_ASSET_PATHS = "\"ARAi/Preview Content\"";
 				DEVELOPMENT_TEAM = 9NG3C5HP77;
 				ENABLE_PREVIEWS = YES;
