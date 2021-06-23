@@ -128,9 +128,10 @@ struct CaptureGalleryView: View {
                         add = true
                         model.captureFolderState?.captures = []
                         model.captureFolderState = captureFolderState
-                       
+                        showCaptureFolderView = false
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                            
                             withAnimation(.easeInOut) {
                                 //model.captureFolderState?.requestLoad()
                             refresh = false
@@ -161,7 +162,7 @@ struct CaptureGalleryView: View {
 //                            }
 //                        }
                         
-                        presentationMode.wrappedValue.dismiss()
+                        
                         
                     }) {
                         Image(systemName: "plus")

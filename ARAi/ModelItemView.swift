@@ -21,12 +21,7 @@ struct ModelItemView: View {
         VStack {
             HStack {
         LeadingTextView(text: item.name, size: 18, opacity: 1.0)
-                    .onAppear() {
-                        do {
-                        imgData = try Data(contentsOf: getDocumentsDirectory().appendingPathComponent(item.id.uuidString + ".png"))
-                        } catch {
-                        }
-                        }
+                  
 //                if item.progress != 1.0 {
 //                   
 //                    CircularProgressView(progress: $item.progress)
@@ -52,9 +47,19 @@ struct ModelItemView: View {
                 
             }
         } 
-    } 
+    }    .onAppear() {
+        
+//        if imgData.isEmpty {
+//        do {
+//        imgData = try Data(contentsOf: getDocumentsDirectory().appendingPathComponent(item.id.uuidString + ".png"))
+//            item.result.append(imgData)
+//        } catch {
+//        }
+//        }
+        }
+}
             
-    }
+    
     func getDocumentsDirectory() -> URL {
         // find all possible documents directories for this user
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)

@@ -48,6 +48,10 @@ final class UserData: ObservableObject {
     
     var instruct = true
     
+    var loading = false
+    
+    var isYourModels = false
+    
 }
 
 import Foundation

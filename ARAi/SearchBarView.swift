@@ -6,11 +6,39 @@
 //
 
 import SwiftUI
-
+import Combine
 struct SearchBarView: View {
     @State private var search: String = ""
     @Binding var categories: [Category]
     @Binding var category: Category
+    private var keyboardHeightPublisher: AnyPublisher<CGFloat, Never> {
+    Publishers.Merge(
+                NotificationCenter.default
+                    .publisher(for: UIResponder.keyboardWillShowNotification)
+                    .compactMap { $0.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect }
+                    .map { $0.height },
+                NotificationCenter.default
+                    .publisher(for: UIResponder.keyboardWillHideNotification)
+                    .map { _ in
+        var items = [Item]()
+        for i in categories.map({$0.items}) {
+                        for item in i {
+                            if item.name.lowercased().contains(search.lowercased()) {
+                                items.append(item)
+                            }
+                        }
+                        
+                    }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        withAnimation(.easeInOut) {
+        category = Category(id: UUID(), name: search, description: "", items: items, colors: ["blue", "purple"])
+        }
+        }
+        return CGFloat(0)}
+                
+    ).eraseToAnyPublisher()
+    }
+
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 25.0)
@@ -35,20 +63,17 @@ struct SearchBarView: View {
                 .foregroundColor(.white)
                 .textFieldStyle(PlainTextFieldStyle())
         }
-       
-        .onChange(of: search, perform: { value in
+        .onAppear() {
            
-            var items = [Item]()
-            for i in categories.map({$0.items}) {
-                for item in i {
-                if item.name.lowercased().contains(search.lowercased()) {
-                    items.append(item)
-                }
-                }
-          
-              }
-            category = Category(id: UUID(), name: search, description: "", items: items, colors: ["blue", "purple"])
-        })
+                   
+        }
+        .onReceive(keyboardHeightPublisher) {  $0 }
+        
+    
+//        .onChange(of: search, perform: { value in
+//
+//
+//        })
         
         } .padding(.horizontal)
         

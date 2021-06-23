@@ -11,6 +11,7 @@ struct CategoryView: View {
 
     @Binding var categories: [Category]
     @Binding var pickedCategory: Category
+    @ObservedObject var userData: UserData
     var body: some View {
         
         ScrollView(.horizontal, showsIndicators: false) {

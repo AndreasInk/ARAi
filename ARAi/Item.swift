@@ -23,3 +23,10 @@ struct Item: Codable, Hashable {
     var result: Data
     
 }
+
+struct ItemImg: Hashable {
+    var id: UUID
+    var name: String
+    var img: UIImage
+    
+}

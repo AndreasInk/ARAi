@@ -85,7 +85,7 @@ struct StoreCardView: View {
                                 print("Purchase Success: \(purchase.productId)")
                                 #warning("add file with firebase")
                                 success = true
-                                
+                                userData.scans += 1
                             case .error(let error):
                                 switch error.code {
                                 case .unknown: print("Unknown error. Please contact support")
@@ -111,6 +111,7 @@ struct StoreCardView: View {
                                 print("Purchase Success: \(purchase.productId)")
                                 #warning("add file with firebase")
                                 success = true
+                                userData.scans += 3
                             case .error(let error):
                                 switch error.code {
                                 case .unknown: print("Unknown error. Please contact support")
@@ -151,6 +152,7 @@ struct StoreCardView: View {
                             case .success(let purchase):
                                 print("Purchase Success: \(purchase.productId)")
                                 success = true
+                                userData.scans += 5
                             case .error(let error):
                                 switch error.code {
                                 case .unknown: print("Unknown error. Please contact support")
@@ -192,22 +194,18 @@ struct StoreCardView: View {
                             .font(.custom("Karla-Medium", size: 24, relativeTo: .headline))
                             .multilineTextAlignment(.center)
                             .padding()
-                            .onDisappear() {
-                                userData.scans -= 1
-                            }
+                           
                         Text("You just helped a college student pay for university and you can now scan more objects!")
                             .font(.custom("Karla-Medium", size: 24, relativeTo: .headline))
                             .multilineTextAlignment(.center)
                             .padding()
                         
                         if text == "Support Andreas" {
-                            Text("Since you gave me an energy drink, here are three free scans!")
+                            Text("Since you gave me an energy drink, here are three five scans!")
                                 .font(.custom("Karla-Medium", size: 32, relativeTo: .headline))
                                 .multilineTextAlignment(.center)
                                 .padding()
-                                .onAppear() {
-                                    userData.scans += 3
-                                }
+                               
                         }
                         Spacer()
                         

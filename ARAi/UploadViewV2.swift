@@ -1346,7 +1346,7 @@ struct UploadViewV2: View {
             Spacer()
             Button(action: {
                 withAnimation(.easeInOut) {
-                    
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                     if userData.scans == 0 {
                         shop = true
                     } else {
@@ -1376,13 +1376,19 @@ struct UploadViewV2: View {
                                
                                 }
                                
-                                timerQueue = SimpleTimer(interval: 5) {
+                                timerQueue = SimpleTimer(interval: 10) {
                                   
                                 checkQueue()
                                     print("YES")
                                 }
                                 timerQueue.start()
                                 prints.append(Print(id: UUID().uuidString, process: "Joining Queue"))
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                                prints.append(Print(id: UUID().uuidString, process: "A lower number in a queue means you are closer to creating your model than others with higher numbers in the queue"))
+                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 15.0) {
+                                prints.append(Print(id: UUID().uuidString, process: "This could take around 10 minutes, please stay in the app until you see success"))
+                                }
                             } else {
                                 showError = true
                             }
@@ -1488,7 +1494,7 @@ struct UploadViewV2: View {
                                                                    try? data.write(to: filename)
                        
                                                                }
-                       
+                                                              
                                                            }
                                                        } catch {
                                                            print("erorr")
@@ -1567,6 +1573,7 @@ ProgressView(value: progress)
                             .ignoresSafeArea()
                             .onDisappear() {
                                 upload = false
+                                userData.reload += 1
                             }
                         VStack {
                             HStack {
@@ -1625,7 +1632,7 @@ ProgressView(value: progress)
         }
     }
     func checkQueue() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+          
             let url2 = URL(string: "https://araiapi.herokuapp.com/checkQueue/")
              if let url = url2 {
     
@@ -1634,9 +1641,9 @@ ProgressView(value: progress)
                              print(httpResponse.statusCode)
     
                      } else {
-                         print(error)
+                       
                      }
-                             guard let data2 = data else { return print("WHAT THE FUCK")}
+                     if let data2 = data  {
                      let decoder = JSONDecoder()
                  do {
     
@@ -1653,7 +1660,12 @@ ProgressView(value: progress)
                             // for i in imgs.indices {
                          var pairs = [PairOfData]()
                          for i in imgs.indices {
-                             pairs.append(PairOfData(id: UUID().uuidString, img: imgs[i], gravity: gravities[i]))
+                             if gravities.indices.contains(i) {
+                                 pairs.append(PairOfData(id: UUID().uuidString, img: imgs[i], gravity: gravities[i]))
+                             } else {
+                                 pairs.append(PairOfData(id: UUID().uuidString, img: imgs[i], gravity: imgs[i]))
+                             }
+                          
                          }
                                  uploadMultipleFiles(urls: pairs)
                              //}
@@ -1663,17 +1675,25 @@ ProgressView(value: progress)
                         
                      } else {
                          let index = note.queue.firstIndex(where: { $0 == userID })
+                         if !prints.map{$0.process}.contains("\(index ?? 0)/\(note.queue.count - 1) in queue") {
+                        
                          prints.append(Print(id: UUID().uuidString, process: "\(index ?? 0)/\(note.queue.count - 1) in queue"))
+                             
+                             if  "\(index ?? 0)/\(note.queue.count - 1) in queue" == ("0/-1 in queue")  {
+                                 showError = true
+                             }
+                     }
                      }
                      
                          
                  } catch {
                  }
+                     }
                  }
                  task.resume()
                  }
                 
-            }
+            
         
     }
        
@@ -1695,7 +1715,10 @@ ProgressView(value: progress)
                         var note = try decoder.decode(Print.self, from: data)
                       
                         note.id = UUID().uuidString
+                        if !prints.map{$0.process}.contains(note.process) {
                         prints.append(note)
+                        }
+                       
                         if  note.process.lowercased().contains("id")  {
                            
                             getUSDZ(id: note.process.replacingOccurrences(of: "ID=", with: ""))
@@ -1788,6 +1811,7 @@ ProgressView(value: progress)
     }
     }
     func sendPrint(text: String) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
         let text2 = text.replacingOccurrences(of: " ", with: "--").replacingOccurrences(of: "/", with: "").replacingOccurrences(of: "\"", with: "")
         
         if  let url = URL(string: "https://araiapi.herokuapp.com/printNowMac/?print=\(text2)") {
@@ -1798,13 +1822,15 @@ ProgressView(value: progress)
             
             task.resume()
         }
+        }
+        
         
     }
     func uploadMultipleFiles(urls: [PairOfData]) {
-         
+        
         for i in urls.indices {
-  
-            var infos = [RestManager.FileInfo]()
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i/2)) {
+                var infos = [RestManager.FileInfo]()
               var newURL = self.getDocumentsDirectory().appendingPathComponent(String(i) + ".HEIC")
             if urls[i].img.lastPathComponent.contains("HEIC") {
   
@@ -1836,6 +1862,7 @@ ProgressView(value: progress)
                 }
             }
           }
+        }
   
   
       }

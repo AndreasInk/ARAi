@@ -57,7 +57,5 @@ struct CategoryItemView: View {
         } .padding()
             .buttonStyle(CatButtonStyle())
            
-    } 
+    }
 }
-
-

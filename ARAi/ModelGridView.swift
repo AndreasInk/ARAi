@@ -95,7 +95,7 @@ struct ModelGridView: View {
                         self.item = item
                         
                      
-                        if category.name == "Your Models" {
+                        if category.name != "Food"  && category.name != "2020 Classics" {
                             destination = getDocumentsDirectory().appendingPathComponent("\(item.id).usdz")
                                            } else {
     //                                           if item.name == "Toliet Paper" {
@@ -107,10 +107,7 @@ struct ModelGridView: View {
                         ready = true
                         
                     }
-                Button(action: {
-                    
-                }) {
-                }
+              
                 .sheet(isPresented: $ready) {
                     ZStack {
                      

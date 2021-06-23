@@ -20,13 +20,14 @@ struct HomeView: View {
     @State var entities = [Entity]()
    
     @Environment(\.presentationMode) private var presentation
+    @State var coolDown = false
     var body: some View {
         NavigationView { [presentation] in
             ScrollView(showsIndicators: false) {
         VStack {
             HeaderView( userData: userData, categories: $categories, category: $category)
                 .onChange(of: userData.reload) { value in
-                   
+                    if !coolDown {
                     let url = self.getDocumentsDirectory().appendingPathComponent("categories.txt")
                     do {
                         
@@ -50,12 +51,18 @@ struct HomeView: View {
                                 
                             } catch {
                             }
-                    for i in category.items.indices {
-                        #warning("removed")
-                    //categories[i].items = categories[i].items.removeDuplicates()
-                    }
+//                    for i in category.items.indices {
+//                        #warning("removed")
+//                    //categories[i].items = categories[i].items.removeDuplicates()
+//                    }
+                        coolDown = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+                            coolDown = false
+                        }
+                }
                 }
                 .onAppear() {
+                    
                     do {
                         if !getDocumentsDirectory().appendingPathComponent("x.png").isFileURL {
                     try UIImage(systemName: "xmark")?.pngData()?.write(to: getDocumentsDirectory().appendingPathComponent("x.png"))
@@ -125,7 +132,7 @@ struct HomeView: View {
 //                    }
                 }
             SearchBarView(categories: $categories, category: $category)
-            CategoryView(categories: $categories, pickedCategory: $category)
+            CategoryView(categories: $categories, pickedCategory: $category, userData: userData)
                 .ignoresSafeArea()
            
            Spacer()

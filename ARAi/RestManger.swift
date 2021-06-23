@@ -383,3 +383,70 @@ extension Data {
         return status
     }
 }
+
+
+//protocol NetworkDisplay: class {
+//    func updateUI(response: String)
+//}
+//
+//
+//class NetworkSessionManager: NSObject {
+//
+//    private var urlSession: URLSession?
+//    private var downloadRequest: URLSessionDownloadTask?
+//    private weak var delegate: NetworkDisplay?
+//
+//    init(withBackgroundSession: String, delegate: NetworkDisplay) {
+//        super.init()
+//        let config = URLSessionConfiguration.background(withIdentifier: withBackgroundSession)
+//        config.isDiscretionary = true
+//        config.sessionSendsLaunchEvents = true
+//        config.allowsCellularAccess = true
+//        self.delegate = delegate
+//        urlSession = URLSession(configuration: config, delegate: self, delegateQueue: .main)
+//    }
+//
+//    init(delegate: NetworkDisplay) {
+//        super.init()
+//        let config = URLSessionConfiguration.default
+//        config.allowsCellularAccess = true
+//        self.delegate = delegate
+//        urlSession = URLSession(configuration: config, delegate: self, delegateQueue: .main)
+//    }
+//
+//    func downloadWithFile(with url: String) {
+//        guard let url = URL(string: url),
+//            let unwrappedURLSession = urlSession else { return }
+//        downloadRequest = unwrappedURLSession.downloadTask(with: url)
+//        downloadRequest?.resume()
+//    }
+//
+//}
+//
+//
+//extension NetworkSessionManager: URLSessionDownloadDelegate, URLSessionDelegate {
+//    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+//        delegate?.updateUI(response: downloadTask.response.debugDescription)
+//    }
+//
+//
+//
+//    func urlSession(_ session: URLSession,
+//                downloadTask: URLSessionDownloadTask,
+//                didWriteData bytesWritten: Int64,
+//           totalBytesWritten: Int64,
+//           totalBytesExpectedToWrite: Int64) {
+//        let progress = (totalBytesWritten / totalBytesExpectedToWrite)
+//        // ...
+//    }
+//
+//
+//    func urlSession(_ session: URLSession,
+//                    task: URLSessionTask,
+//                    didCompleteWithError error: Error?) {
+//        if let errorStr = error?.localizedDescription {
+//            delegate?.updateUI(response: errorStr)
+//        }
+//    }
+//
+//}
