@@ -1295,12 +1295,21 @@ struct UploadViewV2: View {
     
     @Binding var categories: [Category]
     @Binding var upload: Bool
+    
+    @State private var i = 0
+    
+
+    @State private var index = 0
+    
     let rest = RestManager()
     
+    @State var reload = false
+    
+    @State var isLocal = true
     var body: some View {
         ZStack {
             if preload {
-                ARQuickLookView(name: destination.path)
+                ARQuickLookView(item: $item, isLocal: $isLocal, reload: $reload)
                     .ignoresSafeArea()
                     .onAppear() {
                         userData.reload += 1
@@ -1401,7 +1410,31 @@ struct UploadViewV2: View {
                 ZStack {
                    
                     Text(userData.scans != 0 ? (userData.itemIDs.contains("\(captureFolderState.captures.first?.id)") ? "Reupload Without Redeeming" : "Redeem Scan To Upload") : "Purchase Scans In Shop")
-                    
+                        .onAppear() {
+                            let url = self.getDocumentsDirectory().appendingPathComponent("categories.txt")
+                                                                     do {
+                           
+                                                                         let input = try String(contentsOf: url)
+                           
+                           
+                                                                         let jsonData = Data(input.utf8)
+                           
+                                                                             let decoder = JSONDecoder()
+                           
+                           
+                                                                                 let note = try decoder.decode([Category].self, from: jsonData)
+                                                                                 categories = note
+                           
+                           
+                                                                                 //                                if i.first!.id == "1" {
+                                                                                 //                                    notes.removeFirst()
+                                                                                 //                                }
+                           
+                           
+                                                                             } catch {
+                                                                                 print(error.localizedDescription)
+                                                                             }
+                        }
                    
                 } .padding()
             } .buttonStyle(CTAButtonStyle2())
@@ -1447,39 +1480,19 @@ struct UploadViewV2: View {
                     .padding()
                     .onAppear() {
                         
-                        if userData.itemIDs.contains("\(captureFolderState.captures.first?.id)") {
+                        if userData.itemIDs.contains("\( String(describing: model.captureFolderState!.captures.first?.id))") {
                             
                         } else {
-                            userData.itemIDs.append("\(captureFolderState.captures.first?.id)")
-                        userData.scans -= 1
+                            userData.scans -= 1
+                            userData.itemIDs.append("\( String(describing: model.captureFolderState?.captures.first?.id))")
+                        
                         
                         
                         }
-                        let url = self.getDocumentsDirectory().appendingPathComponent("categories.txt")
-                                                                 do {
                        
-                                                                     let input = try String(contentsOf: url)
-                       
-                       
-                                                                     let jsonData = Data(input.utf8)
-                       
-                                                                         let decoder = JSONDecoder()
-                       
-                       
-                                                                             let note = try decoder.decode([Category].self, from: jsonData)
-                                                                             categories = note
-                       
-                       
-                                                                             //                                if i.first!.id == "1" {
-                                                                             //                                    notes.removeFirst()
-                                                                             //                                }
-                       
-                       
-                                                                         } catch {
-                                                                             print(error.localizedDescription)
-                                                                         }
-                                               let index = categories.firstIndex(where: { $0.name == "Your Models" })
-                                                                          categories[index ?? 0].items.append(item)
+                                                                
+                        index = categories.firstIndex(where: { $0.name == "Your Models" }) ?? 0
+                        categories[index].items.append(item)
                                                let encoder = JSONEncoder()
                        
                                                if let encoded = try? encoder.encode(categories) {
@@ -1488,14 +1501,14 @@ struct UploadViewV2: View {
                                                        do {
                                                            let url = self.getDocumentsDirectory().appendingPathComponent("categories.txt")
                                                            try json.write(to: url, atomically: false, encoding: String.Encoding.utf8)
-                                                           if let image = UIImage(contentsOfFile: captureFolderState.captures.last?.imageUrl.path ?? getDocumentsDirectory().appendingPathComponent("x.png").path) {
-                                                               if let data = image.pngData() {
-                                                                   let filename = getDocumentsDirectory().appendingPathComponent("\(item.id).png")
-                                                                   try? data.write(to: filename)
-                       
-                                                               }
-                                                              
-                                                           }
+//                                                           if let image = UIImage(contentsOfFile: captureFolderState.captures.last?.imageUrl.path ?? getDocumentsDirectory().appendingPathComponent("x.png").path) {
+//                                                               if let data = image.pngData() {
+//                                                                   let filename = getDocumentsDirectory().appendingPathComponent("\(item.id).png")
+//                                                                   try? data.write(to: filename)
+//
+//                                                               }
+//
+//                                                           }
                                                        } catch {
                                                            print("erorr")
                                                        }
@@ -1566,65 +1579,7 @@ ProgressView(value: progress)
                     .padding()
            
                 .sheet(isPresented: $showModel) {
-                    ZStack {
-                     
-                    
-                    ARQuickLookView(name: destination.path)
-                            .ignoresSafeArea()
-                            .onDisappear() {
-                                upload = false
-                                userData.reload += 1
-                            }
-                        VStack {
-                            HStack {
-                                
-                                Button(action: {
-                                    showModel = false
-                                }) {
-                                    Image(systemName: "xmark")
-                                        .font(.title)
-                                        .foregroundColor(.black)
-                                        .padding()
-                                        .background(RoundedRectangle(cornerRadius: 25).foregroundColor(.white.opacity(0.4)))
-                                }  .buttonStyle(CTAButtonStyle())
-                                Spacer()
-                                Button(action: {
-                                    
-                                    
-                                        
-                                    
-                //                    if category.name == "Your Models" {
-                //                    destination = URL(fileURLWithPath: documents.appendingPathComponent("\(item.id).reality").path)
-                //                        if !(destination?.isFileURL ?? false) {
-                //
-                //                        }
-                //                    } else {
-                //                        destination = Bundle.main.url(forResource: item.name, withExtension: "reality")!
-                //
-                //                    }
-                                    export2 = true
-                                }) {
-                                    Image(systemName: "arrow.up.square")
-                                        .font(.title)
-                                        .foregroundColor(.black)
-                                        .padding()
-                                        .background(RoundedRectangle(cornerRadius: 25).foregroundColor(.white.opacity(0.4)))
-                                }  .buttonStyle(CTAButtonStyle())
-                            
-                            
-                           
-                                .sheet(isPresented: $export2) {
-                                  ShareSheet(
-                                    activityItems: [destination],
-                                    excludedActivityTypes: [.copyToPasteboard])
-                                }
-                                
-                            } .padding()
-                               
-                            Spacer()
-                    }
-                   
-                }
+                    ARMainView(items: $categories[index].items, item: $item, i: $i, isOpen: $showModel, isLocal: $isLocal)
                 }
             
             }
@@ -1650,29 +1605,27 @@ ProgressView(value: progress)
                          let note = try decoder.decode(Queue.self, from: data2)
                      queue = note
                      if note.queue.first == userID {
-                         timerQueue.cancel()
-                         #warning("disabled")
-                        // DispatchQueue.main.asyncAfter(deadline: .now() + 30.0) {
-                         timer.start()
+                        
                          let imgs = captureFolderState.captures.map{ $0.imageUrl }
                          let gravities = captureFolderState.captures.map{ $0.gravityUrl }
-                         #warning("disabled")
+                        
                             // for i in imgs.indices {
                          var pairs = [PairOfData]()
                          for i in imgs.indices {
-                             if gravities.indices.contains(i) {
-                                 pairs.append(PairOfData(id: UUID().uuidString, img: imgs[i], gravity: gravities[i]))
-                             } else {
-                                 pairs.append(PairOfData(id: UUID().uuidString, img: imgs[i], gravity: imgs[i]))
+#warning("changed")
+                             pairs.append(PairOfData(id: UUID().uuidString, img: imgs[i], gravity: gravities.indices.contains(i) ? gravities[i] : imgs[i] ))
                              }
                           
-                         }
+                         
                                  uploadMultipleFiles(urls: pairs)
                              //}
                          sendPrint(text: "Uploaded Images")
                       
                        //  }
+                         timerQueue.cancel()
                         
+                        // DispatchQueue.main.asyncAfter(deadline: .now() + 30.0) {
+                         timer.start()
                      } else {
                          let index = note.queue.firstIndex(where: { $0 == userID })
                          if !prints.map{$0.process}.contains("\(index ?? 0)/\(note.queue.count - 1) in queue") {
@@ -1731,7 +1684,11 @@ ProgressView(value: progress)
                                 progress = (Double(note.process.replacingOccurrences(of: "Progress--=--", with: "")) ?? 0.0) - 0.1
                             }
                         }
-                        
+                        if  note.process.lowercased().contains("error")  {
+                            withAnimation(.easeInOut) {
+                               showError = true
+                            }
+                        }
                         
                         
                     } catch {
@@ -1775,6 +1732,7 @@ ProgressView(value: progress)
 //                     }
                      DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
                          do {
+                             
                  try data2.write(to: destination)
                              
 //                             worldBlock = try Entity.load(contentsOf: destination)
@@ -1829,7 +1787,7 @@ ProgressView(value: progress)
     func uploadMultipleFiles(urls: [PairOfData]) {
         
         for i in urls.indices {
-            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i/2)) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i)) {
                 var infos = [RestManager.FileInfo]()
               var newURL = self.getDocumentsDirectory().appendingPathComponent(String(i) + ".HEIC")
             if urls[i].img.lastPathComponent.contains("HEIC") {

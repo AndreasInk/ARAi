@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		E1785248267B9C7800908D06 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1785247267B9C7800908D06 /* ContentView.swift */; };
+		E17FF15C268A9935000C4283 /* ARMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17FF15B268A9935000C4283 /* ARMainView.swift */; };
+		E17FF15E268A995F000C4283 /* ARMenuOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17FF15D268A995F000C4283 /* ARMenuOverlayView.swift */; };
+		E199408E26846A66000772AB /* Blank.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = E1F19B292681999200E64359 /* Blank.rcproject */; };
 		E1DA5986267D498000ACD520 /* UploadViewV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DA5985267D498000ACD520 /* UploadViewV2.swift */; };
 		E1DA5988267D4DCD00ACD520 /* SimpleTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DA5987267D4DCD00ACD520 /* SimpleTimer.swift */; };
 		ED252C83267B975E00846256 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED252C82267B975E00846256 /* AppDelegate.swift */; };
@@ -109,6 +112,8 @@
 
 /* Begin PBXFileReference section */
 		E1785247267B9C7800908D06 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E17FF15B268A9935000C4283 /* ARMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMainView.swift; sourceTree = "<group>"; };
+		E17FF15D268A995F000C4283 /* ARMenuOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMenuOverlayView.swift; sourceTree = "<group>"; };
 		E1DA5985267D498000ACD520 /* UploadViewV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewV2.swift; sourceTree = "<group>"; };
 		E1DA5987267D4DCD00ACD520 /* SimpleTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTimer.swift; sourceTree = "<group>"; };
 		E1F19B292681999200E64359 /* Blank.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Blank.rcproject; sourceTree = "<group>"; };
@@ -263,7 +268,6 @@
 				ED252C82267B975E00846256 /* AppDelegate.swift */,
 				ED252C84267B975E00846256 /* SceneDelegate.swift */,
 				ED252CBD267B977B00846256 /* ARGestures.swift */,
-				ED252CBB267B977B00846256 /* ARQuickLook.swift */,
 				ED252CE8267B978E00846256 /* ARView.swift */,
 				E1785247267B9C7800908D06 /* ContentView.swift */,
 				ED252CD9267B978400846256 /* ARViewContainer.swift */,
@@ -318,6 +322,9 @@
 				ED252CD2267B978400846256 /* UploadView.swift */,
 				E1DA5985267D498000ACD520 /* UploadViewV2.swift */,
 				E1DA5987267D4DCD00ACD520 /* SimpleTimer.swift */,
+				E17FF15B268A9935000C4283 /* ARMainView.swift */,
+				E17FF15D268A995F000C4283 /* ARMenuOverlayView.swift */,
+				ED252CBB267B977B00846256 /* ARQuickLook.swift */,
 				ED252CE2267B978500846256 /* UserData.swift */,
 				ED252CC0267B977E00846256 /* Wipes.reality */,
 				ED252CCF267B978400846256 /* banana.usdz */,
@@ -535,12 +542,15 @@
 				ED252CF6267B978F00846256 /* CameraViewModel.swift in Sources */,
 				ED252CEE267B978F00846256 /* CircularProgressView.swift in Sources */,
 				ED252CF8267B978F00846256 /* PhotoCaptureDelegate.swift in Sources */,
+				E17FF15C268A9935000C4283 /* ARMainView.swift in Sources */,
+				E17FF15E268A995F000C4283 /* ARMenuOverlayView.swift in Sources */,
 				ED252D27267B978F00846256 /* InfoPanelView.swift in Sources */,
 				ED252D12267B978F00846256 /* HomeView.swift in Sources */,
 				ED252D1A267B978F00846256 /* StoreView.swift in Sources */,
 				ED252D05267B978F00846256 /* TriggerEveryTimer.swift in Sources */,
 				ED252D10267B978F00846256 /* CategoryView.swift in Sources */,
 				ED252CFE267B978F00846256 /* FirebaseStorageManager.swift in Sources */,
+				E199408E26846A66000772AB /* Blank.rcproject in Sources */,
 				ED252D24267B978F00846256 /* ModelGridView.swift in Sources */,
 				ED252D0A267B978F00846256 /* HelpPageView.swift in Sources */,
 				ED252D0D267B978F00846256 /* CaptureFoldersView.swift in Sources */,
@@ -736,7 +746,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 75;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"ARAi/Preview Content\"";
 				DEVELOPMENT_TEAM = 9NG3C5HP77;
 				ENABLE_PREVIEWS = YES;
@@ -745,6 +755,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.01;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Ai.ARAi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -760,7 +771,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 75;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"ARAi/Preview Content\"";
 				DEVELOPMENT_TEAM = 9NG3C5HP77;
 				ENABLE_PREVIEWS = YES;
@@ -769,6 +780,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.01;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Ai.ARAi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

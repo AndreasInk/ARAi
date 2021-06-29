@@ -87,6 +87,7 @@ class CameraViewModel: ObservableObject {
     /// This property indicates if auto-capture is currently active. The app sets this to `true` while it's
     /// automatically capturing images using the timer.
     @Published var isAutoCaptureActive: Bool = false
+    @Published var front: Bool = false
 
     /// If `isAutoCaptureActive` is `true`, this property contains the number of seconds until the
     /// next capture trigger.
@@ -305,7 +306,7 @@ class CameraViewModel: ObservableObject {
         }
     }
 
-    private var videoDeviceInput: AVCaptureDeviceInput? = nil
+     var videoDeviceInput: AVCaptureDeviceInput? = nil
 
     /// This private property holds the current state of the session. The app uses this to pause the app
     /// when it goes into the background and to resume the app when it comes back to the foreground.
@@ -327,8 +328,10 @@ class CameraViewModel: ObservableObject {
     private var triggerEveryTimer: TriggerEveryTimer? = nil
 
     // MARK: - Private Functions
-
+        
     private func capturePhotoAndMetadata() {
+        
+        
         logger.log("Capture photo called...")
         dispatchPrecondition(condition: .onQueue(.main))
 
@@ -482,7 +485,7 @@ class CameraViewModel: ObservableObject {
         }
     }
 
-    private func configureSession() {
+     func configureSession() {
         // Make sure setup hasn't failed.
         guard setupResult == .inProgress else {
             logger.error("Setup failed, can't configure session!  result=\(String(describing: self.setupResult))")
@@ -497,7 +500,7 @@ class CameraViewModel: ObservableObject {
 
         do {
             let videoDeviceInput = try AVCaptureDeviceInput(
-                device: getVideoDeviceForPhotogrammetry())
+                device: front ? getVideoDeviceForPhotogrammetryFront() : getVideoDeviceForPhotogrammetry())
 
             if session.canAddInput(videoDeviceInput) {
                 session.addInput(videoDeviceInput)
@@ -548,7 +551,7 @@ class CameraViewModel: ObservableObject {
     }
 
     /// This method checks for a depth-capable dual rear camera and, if found, returns an `AVCaptureDevice`.
-    private func getVideoDeviceForPhotogrammetry() throws -> AVCaptureDevice {
+     func getVideoDeviceForPhotogrammetry() throws -> AVCaptureDevice {
         var defaultVideoDevice: AVCaptureDevice?
 
         // Specify dual camera to get access to depth data.
@@ -564,6 +567,32 @@ class CameraViewModel: ObservableObject {
        } else if let backWideCameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
                                                                      for: .video,
                                                                      position: .back) {
+            logger.log(">>> Can't find a depth-capable camera: using wide back camera!")
+            defaultVideoDevice = backWideCameraDevice
+        }
+
+        guard let videoDevice = defaultVideoDevice else {
+            logger.error("Back video device is unavailable.")
+            throw SessionSetupError.configurationFailed
+        }
+        return videoDevice
+    }
+     func getVideoDeviceForPhotogrammetryFront() throws -> AVCaptureDevice {
+        var defaultVideoDevice: AVCaptureDevice?
+
+        // Specify dual camera to get access to depth data.
+        if let dualCameraDevice = AVCaptureDevice.default(.builtInDualCamera, for: .video,
+                                                          position: .front) {
+            logger.log(">>> Got back dual camera!")
+            defaultVideoDevice = dualCameraDevice
+        } else if let dualWideCameraDevice = AVCaptureDevice.default(.builtInDualWideCamera,
+                                                                for: .video,
+                                                                position: .front) {
+            logger.log(">>> Got back dual wide camera!")
+            defaultVideoDevice = dualWideCameraDevice
+       } else if let backWideCameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
+                                                                     for: .video,
+                                                                     position: .front) {
             logger.log(">>> Can't find a depth-capable camera: using wide back camera!")
             defaultVideoDevice = backWideCameraDevice
         }

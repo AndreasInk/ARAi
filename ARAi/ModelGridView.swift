@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RealityKit
+
 struct ModelGridView: View {
     let columns = [GridItem(.adaptive(minimum: 80)), GridItem(.adaptive(minimum: 80))]
     @State private var items = [Item]()
@@ -23,6 +24,10 @@ struct ModelGridView: View {
     @State private var camera = false
     @State private var export = false
     @State private var preload = true
+    
+    @State private var reload = false
+    
+    @State private var isLocal = true
     var body: some View {
         ZStack {
             Color("altText")
@@ -69,7 +74,7 @@ struct ModelGridView: View {
 //                }
             } else {
                 if preload {
-                ARQuickLookView(name: destination.path)
+                    ARQuickLookView(item: $item, isLocal: $isLocal, reload: $reload)
                         .ignoresSafeArea()
                         .onAppear() {
                             preload = false
@@ -97,11 +102,13 @@ struct ModelGridView: View {
                      
                         if category.name != "Food"  && category.name != "2020 Classics" {
                             destination = getDocumentsDirectory().appendingPathComponent("\(item.id).usdz")
+                            isLocal = true
                                            } else {
     //                                           if item.name == "Toliet Paper" {
     //                                               destination = Bundle.main.url(forResource: "TP", withExtension: "reality")!
     //                                           } else {
-                                               destination = Bundle.main.url(forResource: item.name, withExtension: "reality")!
+                                               isLocal = false
+                                             //  destination = Bundle.main.url(forResource: item.name, withExtension: "reality")!
                                                }
                        
                         ready = true
@@ -112,59 +119,12 @@ struct ModelGridView: View {
                     ZStack {
                      
                     
-                    ARQuickLookView(name: destination.path)
+                        ARMainView(items: $items, item: $item, i: $i, isOpen: $ready, isLocal: $isLocal)
                             .ignoresSafeArea()
                             .onDisappear() {
                                
                             }
-                        VStack {
-                            HStack {
-                                
-                                Button(action: {
-                                    ready = false
-                                }) {
-                                    Image(systemName: "xmark")
-                                        .font(.title)
-                                        .foregroundColor(.black)
-                                        .padding()
-                                        .background(RoundedRectangle(cornerRadius: 25).foregroundColor(.white.opacity(0.4)))
-                                }  .buttonStyle(CTAButtonStyle())
-                                Spacer()
-                                Button(action: {
-                                    
-                                    
-                                        
-                                    
-                //                    if category.name == "Your Models" {
-                //                    destination = URL(fileURLWithPath: documents.appendingPathComponent("\(item.id).reality").path)
-                //                        if !(destination?.isFileURL ?? false) {
-                //
-                //                        }
-                //                    } else {
-                //                        destination = Bundle.main.url(forResource: item.name, withExtension: "reality")!
-                //
-                //                    }
-                                    export = true
-                                }) {
-                                    Image(systemName: "arrow.up.square")
-                                        .font(.title)
-                                        .foregroundColor(.black)
-                                        .padding()
-                                        .background(RoundedRectangle(cornerRadius: 25).foregroundColor(.white.opacity(0.4)))
-                                }  .buttonStyle(CTAButtonStyle())
-                            
-                            
-                           
-                                .sheet(isPresented: $export) {
-                                  ShareSheet(
-                                    activityItems: [destination],
-                                    excludedActivityTypes: [.copyToPasteboard])
-                                }
-                                
-                            } .padding()
-                               
-                            Spacer()
-                    }
+                    
                    
                 }
                     

@@ -6,6 +6,7 @@ A view that displays the camera image and capture button.
 */
 import Foundation
 import SwiftUI
+import AVKit
 
 /// This is the app's primary view. It contains a preview area, a capture button, and a thumbnail view
 /// showing the most recenty captured image.
@@ -87,7 +88,7 @@ struct CaptureButtonPanelView: View {
     @ObservedObject var userData: UserData
     /// This property stores the full width of the bar. The view uses this to place items.
     var width: CGFloat
-    
+    @State var animate = false
     var body: some View {
         // Add the bottom panel, which contains the thumbnail and capture button.
         ZStack(alignment: .center) {
@@ -107,8 +108,55 @@ struct CaptureButtonPanelView: View {
                 CaptureModeButton(model: model,
                                   frameWidth: width / 3)
                     .padding(.horizontal)
+               
+               
             }
-        }
+            HStack {
+                
+                Spacer()
+            Button(action: {
+                withAnimation(.easeInOut(duration: 0.5)) {
+                    animate.toggle()
+                }
+                do {
+                let videoDeviceInputOld = try AVCaptureDeviceInput(
+                    device: model.front ? model.getVideoDeviceForPhotogrammetry() :  model.getVideoDeviceForPhotogrammetryFront())
+                
+                model.front.toggle()
+              
+                    let videoDeviceInput = try AVCaptureDeviceInput(
+                        device: model.front ? model.getVideoDeviceForPhotogrammetryFront() : model.getVideoDeviceForPhotogrammetry())
+                   
+                    model.session.removeInput(model.videoDeviceInput!)
+                   
+                    if model.session.canAddInput(videoDeviceInput) {
+                       
+                        model.session.addInput(videoDeviceInput)
+                        model.videoDeviceInput = videoDeviceInput
+                    } else {
+                      //  logger.error("Couldn't add video device input to the session.")
+                      //  setupResult = .configurationFailed
+                        return
+                    }
+                } catch {
+                   // logger.error("Couldn't create video device input: \(String(describing: error))")
+                    //setupResult = .configurationFailed
+                    return
+                }
+            }) {
+                Image(systemName: "camera")
+                    .font(.largeTitle)
+                    .foregroundColor(Color.white)
+                    .frame(width: CaptureButton.squareDiameter,
+                           height: CaptureButton.squareDiameter,
+                           alignment: .center)
+                    .cornerRadius(5)
+                    .rotation3DEffect(.degrees(animate ? 180 : 360), axis: (x: 0, y:  1, z: 0))
+                
+            }
+                
+            }
+        } .padding(.trailing)
     }
 }
 
