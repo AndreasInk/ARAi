@@ -11,6 +11,11 @@
 		E17FF15C268A9935000C4283 /* ARMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17FF15B268A9935000C4283 /* ARMainView.swift */; };
 		E17FF15E268A995F000C4283 /* ARMenuOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17FF15D268A995F000C4283 /* ARMenuOverlayView.swift */; };
 		E199408E26846A66000772AB /* Blank.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = E1F19B292681999200E64359 /* Blank.rcproject */; };
+		E1A4636A268BC92D00616623 /* Bird.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = E1A46369268BC92D00616623 /* Bird.rcproject */; };
+		E1A4636C268BC9AE00616623 /* BirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A4636B268BC9AE00616623 /* BirdView.swift */; };
+		E1A4636E268BC9CF00616623 /* CustomARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A4636D268BC9CF00616623 /* CustomARView.swift */; };
+		E1A46371268BCA2A00616623 /* RealityUI in Frameworks */ = {isa = PBXBuildFile; productRef = E1A46370268BCA2A00616623 /* RealityUI */; };
+		E1A46373268BCF5300616623 /* ARViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A46372268BCF5300616623 /* ARViews.swift */; };
 		E1DA5986267D498000ACD520 /* UploadViewV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DA5985267D498000ACD520 /* UploadViewV2.swift */; };
 		E1DA5988267D4DCD00ACD520 /* SimpleTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DA5987267D4DCD00ACD520 /* SimpleTimer.swift */; };
 		ED252C83267B975E00846256 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED252C82267B975E00846256 /* AppDelegate.swift */; };
@@ -114,6 +119,10 @@
 		E1785247267B9C7800908D06 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E17FF15B268A9935000C4283 /* ARMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMainView.swift; sourceTree = "<group>"; };
 		E17FF15D268A995F000C4283 /* ARMenuOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMenuOverlayView.swift; sourceTree = "<group>"; };
+		E1A46369268BC92D00616623 /* Bird.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Bird.rcproject; sourceTree = "<group>"; };
+		E1A4636B268BC9AE00616623 /* BirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdView.swift; sourceTree = "<group>"; };
+		E1A4636D268BC9CF00616623 /* CustomARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomARView.swift; sourceTree = "<group>"; };
+		E1A46372268BCF5300616623 /* ARViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViews.swift; sourceTree = "<group>"; };
 		E1DA5985267D498000ACD520 /* UploadViewV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewV2.swift; sourceTree = "<group>"; };
 		E1DA5987267D4DCD00ACD520 /* SimpleTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTimer.swift; sourceTree = "<group>"; };
 		E1F19B292681999200E64359 /* Blank.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Blank.rcproject; sourceTree = "<group>"; };
@@ -208,6 +217,7 @@
 			files = (
 				ED252D2A267B982700846256 /* SwiftyStoreKit in Frameworks */,
 				ED252D2D267B986B00846256 /* ZIPFoundation in Frameworks */,
+				E1A46371268BCA2A00616623 /* RealityUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +315,9 @@
 				ED252CE1267B978500846256 /* ModelItemView.swift */,
 				ED252CCD267B978200846256 /* ModelLoader.swift */,
 				ED252CDD267B978500846256 /* NoCameraARView.swift */,
+				E1A46372268BCF5300616623 /* ARViews.swift */,
+				E1A4636B268BC9AE00616623 /* BirdView.swift */,
+				E1A4636D268BC9CF00616623 /* CustomARView.swift */,
 				ED252CB7267B977B00846256 /* OnboardingView.swift */,
 				ED252CBC267B977B00846256 /* PhotoCaptureDelegate.swift */,
 				ED252CC1267B978000846256 /* Pizza.reality */,
@@ -321,6 +334,7 @@
 				ED252CC9267B978100846256 /* TriggerEveryTimer.swift */,
 				ED252CD2267B978400846256 /* UploadView.swift */,
 				E1DA5985267D498000ACD520 /* UploadViewV2.swift */,
+				E1A46369268BC92D00616623 /* Bird.rcproject */,
 				E1DA5987267D4DCD00ACD520 /* SimpleTimer.swift */,
 				E17FF15B268A9935000C4283 /* ARMainView.swift */,
 				E17FF15D268A995F000C4283 /* ARMenuOverlayView.swift */,
@@ -381,6 +395,7 @@
 			packageProductDependencies = (
 				ED252D29267B982700846256 /* SwiftyStoreKit */,
 				ED252D2C267B986B00846256 /* ZIPFoundation */,
+				E1A46370268BCA2A00616623 /* RealityUI */,
 			);
 			productName = ARAi;
 			productReference = ED252C7F267B975E00846256 /* ARAi.app */;
@@ -456,6 +471,7 @@
 			packageReferences = (
 				ED252D28267B982700846256 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */,
 				ED252D2B267B986B00846256 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+				E1A4636F268BCA2A00616623 /* XCRemoteSwiftPackageReference "RealityUI" */,
 			);
 			productRefGroup = ED252C80267B975E00846256 /* Products */;
 			projectDirPath = "";
@@ -560,18 +576,22 @@
 				ED252D06267B978F00846256 /* ImageLoader.swift in Sources */,
 				ED252D23267B978F00846256 /* StatusView.swift in Sources */,
 				ED252D18267B978F00846256 /* HeaderView.swift in Sources */,
+				E1A4636E268BC9CF00616623 /* CustomARView.swift in Sources */,
 				ED252CF5267B978F00846256 /* AsyncImageHelpers.swift in Sources */,
 				ED252D14267B978F00846256 /* CaptureInfo.swift in Sources */,
 				ED252D1C267B978F00846256 /* UserData.swift in Sources */,
+				E1A4636A268BC92D00616623 /* Bird.rcproject in Sources */,
 				ED252D1E267B978F00846256 /* LeadingTextView.swift in Sources */,
 				ED252CF2267B978F00846256 /* CaptureFolderState.swift in Sources */,
 				ED252D16267B978F00846256 /* ModelApp.swift in Sources */,
 				E1785248267B9C7800908D06 /* ContentView.swift in Sources */,
 				ED252D26267B978F00846256 /* CameraPreviewView.swift in Sources */,
 				ED252CF3267B978F00846256 /* OnboardingView.swift in Sources */,
+				E1A46373268BCF5300616623 /* ARViews.swift in Sources */,
 				ED252D03267B978F00846256 /* StoreCardView.swift in Sources */,
 				ED252D1B267B978F00846256 /* ModelItemView.swift in Sources */,
 				ED252D0C267B978F00846256 /* UploadView.swift in Sources */,
+				E1A4636C268BC9AE00616623 /* BirdView.swift in Sources */,
 				ED252D11267B978F00846256 /* TimerView.swift in Sources */,
 				ED252D0B267B978F00846256 /* CameraView.swift in Sources */,
 				E1DA5986267D498000ACD520 /* UploadViewV2.swift in Sources */,
@@ -746,7 +766,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ARAi/Preview Content\"";
 				DEVELOPMENT_TEAM = 9NG3C5HP77;
 				ENABLE_PREVIEWS = YES;
@@ -771,7 +791,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ARAi/Preview Content\"";
 				DEVELOPMENT_TEAM = 9NG3C5HP77;
 				ENABLE_PREVIEWS = YES;
@@ -915,6 +935,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E1A4636F268BCA2A00616623 /* XCRemoteSwiftPackageReference "RealityUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/maxxfrazer/RealityUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		ED252D28267B982700846256 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/bizz84/SwiftyStoreKit.git";
@@ -934,6 +962,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E1A46370268BCA2A00616623 /* RealityUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E1A4636F268BCA2A00616623 /* XCRemoteSwiftPackageReference "RealityUI" */;
+			productName = RealityUI;
+		};
 		ED252D29267B982700846256 /* SwiftyStoreKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = ED252D28267B982700846256 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */;

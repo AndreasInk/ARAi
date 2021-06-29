@@ -240,7 +240,7 @@ struct ARMenuOverlayView: View {
                 }
             
         } .padding()
-        } .padding(showButtons ? 0 : 2)
+        } 
             .animation(.spring())
             .transition(.move(edge: .bottom))
     }

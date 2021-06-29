@@ -98,7 +98,7 @@ struct ModelGridView: View {
                     ///.id(item.id)
                     .onTapGesture() {
                         self.item = item
-                        
+                        items = category.items.removeDuplicates()
                      
                         if category.name != "Food"  && category.name != "2020 Classics" {
                             destination = getDocumentsDirectory().appendingPathComponent("\(item.id).usdz")

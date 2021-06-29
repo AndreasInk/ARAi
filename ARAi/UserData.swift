@@ -23,7 +23,7 @@ final class UserData: ObservableObject {
     var usedFreeScan: Bool = false
     
     @Published(key: "scans")
-    var scans: Int = 5
+    var scans: Int = 2
     
     @Published(key: "userID")
     var userID: String = UUID().uuidString

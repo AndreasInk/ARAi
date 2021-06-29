@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "RealityUI",
+        "repositoryURL": "https://github.com/maxxfrazer/RealityUI.git",
+        "state": {
+          "branch": null,
+          "revision": "512fe6acedccbcffa37b686d810843bebdc4cb1b",
+          "version": "1.2.1"
+        }
+      },
+      {
         "package": "SwiftyStoreKit",
         "repositoryURL": "https://github.com/bizz84/SwiftyStoreKit.git",
         "state": {

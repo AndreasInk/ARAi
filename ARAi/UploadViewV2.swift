@@ -1479,15 +1479,10 @@ struct UploadViewV2: View {
                     .multilineTextAlignment(.center)
                     .padding()
                     .onAppear() {
-                        
-                        if userData.itemIDs.contains("\( String(describing: model.captureFolderState!.captures.first?.id))") {
-                            
-                        } else {
+                       
+                        if !userData.itemIDs.contains(model.captureDir!.relativePath) {
                             userData.scans -= 1
-                            userData.itemIDs.append("\( String(describing: model.captureFolderState?.captures.first?.id))")
-                        
-                        
-                        
+                            userData.itemIDs.append(model.captureDir!.relativePath)
                         }
                        
                                                                 

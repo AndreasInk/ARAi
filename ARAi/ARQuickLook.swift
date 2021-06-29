@@ -76,7 +76,9 @@ struct ARQuickLookView: UIViewControllerRepresentable {
             
                 
             if !parent.isLocal {
+               
                 fileURL = Bundle.main.url(forResource: parent.item.name, withExtension: "reality")!
+            
             }
             
              item = ARQuickLookPreviewItem(fileAt: fileURL)

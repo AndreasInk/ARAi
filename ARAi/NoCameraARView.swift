@@ -22,13 +22,10 @@ struct NoCameraARViewContainer: UIViewRepresentable {
        
         // Load the "Box" scene from the "Experience" Reality File
         do {
-        let url = Bundle.main.url(forResource: "Banana", withExtension: "reality")!
-        
+            let bird = try Bird.loadScene()
+           
         //let food = ((try? Entity.load(contentsOf: url)) ?? boxAnchor.parent)!
-        entity = try Entity.load(contentsOf: url)
-            boxAnchor.anchor?.addChild(entity)
-        // Add the box anchor to the scene
-            arView.scene.addAnchor(boxAnchor)
+            arView.scene.addAnchor(bird)
             
             var sphereMaterial = SimpleMaterial()
                   sphereMaterial.metallic = MaterialScalarParameter(floatLiteral: 1)
