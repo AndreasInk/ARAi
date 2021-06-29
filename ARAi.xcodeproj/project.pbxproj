@@ -11,7 +11,6 @@
 		E17FF15C268A9935000C4283 /* ARMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17FF15B268A9935000C4283 /* ARMainView.swift */; };
 		E17FF15E268A995F000C4283 /* ARMenuOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17FF15D268A995F000C4283 /* ARMenuOverlayView.swift */; };
 		E199408E26846A66000772AB /* Blank.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = E1F19B292681999200E64359 /* Blank.rcproject */; };
-		E1A4636A268BC92D00616623 /* Bird.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = E1A46369268BC92D00616623 /* Bird.rcproject */; };
 		E1A4636C268BC9AE00616623 /* BirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A4636B268BC9AE00616623 /* BirdView.swift */; };
 		E1A4636E268BC9CF00616623 /* CustomARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A4636D268BC9CF00616623 /* CustomARView.swift */; };
 		E1A46371268BCA2A00616623 /* RealityUI in Frameworks */ = {isa = PBXBuildFile; productRef = E1A46370268BCA2A00616623 /* RealityUI */; };
@@ -119,7 +118,6 @@
 		E1785247267B9C7800908D06 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E17FF15B268A9935000C4283 /* ARMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMainView.swift; sourceTree = "<group>"; };
 		E17FF15D268A995F000C4283 /* ARMenuOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMenuOverlayView.swift; sourceTree = "<group>"; };
-		E1A46369268BC92D00616623 /* Bird.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Bird.rcproject; sourceTree = "<group>"; };
 		E1A4636B268BC9AE00616623 /* BirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdView.swift; sourceTree = "<group>"; };
 		E1A4636D268BC9CF00616623 /* CustomARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomARView.swift; sourceTree = "<group>"; };
 		E1A46372268BCF5300616623 /* ARViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViews.swift; sourceTree = "<group>"; };
@@ -334,7 +332,6 @@
 				ED252CC9267B978100846256 /* TriggerEveryTimer.swift */,
 				ED252CD2267B978400846256 /* UploadView.swift */,
 				E1DA5985267D498000ACD520 /* UploadViewV2.swift */,
-				E1A46369268BC92D00616623 /* Bird.rcproject */,
 				E1DA5987267D4DCD00ACD520 /* SimpleTimer.swift */,
 				E17FF15B268A9935000C4283 /* ARMainView.swift */,
 				E17FF15D268A995F000C4283 /* ARMenuOverlayView.swift */,
@@ -580,7 +577,6 @@
 				ED252CF5267B978F00846256 /* AsyncImageHelpers.swift in Sources */,
 				ED252D14267B978F00846256 /* CaptureInfo.swift in Sources */,
 				ED252D1C267B978F00846256 /* UserData.swift in Sources */,
-				E1A4636A268BC92D00616623 /* Bird.rcproject in Sources */,
 				ED252D1E267B978F00846256 /* LeadingTextView.swift in Sources */,
 				ED252CF2267B978F00846256 /* CaptureFolderState.swift in Sources */,
 				ED252D16267B978F00846256 /* ModelApp.swift in Sources */,
