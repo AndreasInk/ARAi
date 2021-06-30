@@ -10,12 +10,12 @@ import RealityKit
 struct HomeView: View {
     
     
-    @State private var categories = [Category(id: UUID(), name: "Your Models", description: "", items: [Item](), colors: ["purple", "blue"]), Category(id: UUID(), name: "Food", description: "", items: [Item(id: UUID(), name: "Burger", description: "", progress: 1.0, result: Data()), Item(id: UUID(), name: "Pizza", description: "", progress: 1.0, result: Data()), Item(id: UUID(), name: "Broccoli", description: "", progress: 1.0, result: Data()), Item(id: UUID(), name: "Banana", description: "", progress: 1.0, result: Data())],  colors: ["red", "purple"]), Category(id: UUID(), name: "2020 Classics", description: "", items: [Item(id: UUID(), name: "Wipes", description: "", progress: 1.0, result: Data()), Item(id: UUID(), name: "Toliet-Paper", description: "", progress: 1.0, result: Data())],  colors: ["dark", "darker"])]
-    //, Category(id: UUID(), name: "Tech", description: "", items: [Item(id: UUID(), name: "Microchip", description: "", progress: 1.0, result: Data())])
+    @State private var categories = [Category(id: UUID(), name: "Your Models", description: "", items: [Item](), colors: ["purple", "blue"]), Category(id: UUID(), name: "Food", description: "", items: [Item(id: UUID().uuidString, name: "Burger", description: "", progress: 1.0, result: Data()), Item(id: UUID().uuidString, name: "Pizza", description: "", progress: 1.0, result: Data()), Item(id: UUID().uuidString, name: "Broccoli", description: "", progress: 1.0, result: Data()), Item(id: UUID().uuidString, name: "Banana", description: "", progress: 1.0, result: Data())],  colors: ["red", "purple"]), Category(id: UUID(), name: "2020 Classics", description: "", items: [Item(id: UUID().uuidString, name: "Wipes", description: "", progress: 1.0, result: Data()), Item(id: UUID().uuidString, name: "Toliet-Paper", description: "", progress: 1.0, result: Data())],  colors: ["dark", "darker"])]
+    //, Category(id: UUID(), name: "Tech", description: "", items: [Item(id: UUID().uuidString, name: "Microchip", description: "", progress: 1.0, result: Data())])
     
-                             //[Item(id: UUID(), name: "Bannana", description: "It's a fruit!", progress: 1.0, result: Data()), Item(id: UUID(), name: "Apple", description: "It's a fruit!", progress: 1.0, result: Data()), Item(id: UUID(), name: "Orange", description: "It's a fruit!", progress: 1.0, result: Data()), Item(id: UUID(), name: "Blueberries", description: "It's a fruit!", progress: 1.0, result: Data())])]
+                             //[Item(id: UUID().uuidString, name: "Bannana", description: "It's a fruit!", progress: 1.0, result: Data()), Item(id: UUID().uuidString, name: "Apple", description: "It's a fruit!", progress: 1.0, result: Data()), Item(id: UUID().uuidString, name: "Orange", description: "It's a fruit!", progress: 1.0, result: Data()), Item(id: UUID().uuidString, name: "Blueberries", description: "It's a fruit!", progress: 1.0, result: Data())])]
     @State private var category = Category(id: UUID(), name: "Fruits", description: "", items: [Item](),  colors: ["purple", "blue"])
-    //[Item(id: UUID(), name: "Bannana", description: "It's a fruit!", progress: 0.0, result: Data()), Item(id: UUID(), name: "Apple", description: "It's a fruit!", progress: 0.0, result: Data()), Item(id: UUID(), name: "Orange", description: "It's a fruit!", progress: 0.0, result: Data()), Item(id: UUID(), name: "Blueberries", description: "It's a fruit!", progress: 0.0, result: Data())])
+    //[Item(id: UUID().uuidString, name: "Bannana", description: "It's a fruit!", progress: 0.0, result: Data()), Item(id: UUID().uuidString, name: "Apple", description: "It's a fruit!", progress: 0.0, result: Data()), Item(id: UUID().uuidString, name: "Orange", description: "It's a fruit!", progress: 0.0, result: Data()), Item(id: UUID().uuidString, name: "Blueberries", description: "It's a fruit!", progress: 0.0, result: Data())])
     @ObservedObject var userData: UserData
     @State var entities = [Entity]()
    
@@ -155,7 +155,7 @@ struct HomeView: View {
                         }
         
                     
-            ModelGridView(category: $category, entities: entities, userData: userData)
+            ModelGridView(category: $category, entities: entities, userData: userData, categories: $categories)
              //  
         } .navigationBarHidden(true)
               //

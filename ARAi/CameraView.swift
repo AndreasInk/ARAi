@@ -166,7 +166,8 @@ struct CaptureButtonPanelView: View {
 struct ScanToolbarView: View {
     @ObservedObject var model: CameraViewModel
     @Binding var showInfo: Bool
-    
+    @State var isImporting = false
+    @State var selected : [SelectedImages] = []
     var body: some View {
         ZStack {
             HStack {
@@ -184,6 +185,13 @@ struct ScanToolbarView: View {
                     Image(systemName: "questionmark.circle")
                         .foregroundColor(Color.blue)
                 }
+               
+                Button(action: {
+                    isImporting = true
+                }) {
+                    Image(systemName: "arrow.down.square")
+                        .padding()
+                }
             }
             
             if showInfo {
@@ -196,6 +204,69 @@ struct ScanToolbarView: View {
                         }
                     }
             }
+                
+        }
+        .sheet(isPresented: $isImporting) {
+            VStack {
+                CustomPicker(selected: self.$selected, show: self.$isImporting)
+                Button(action: {
+                    
+                    model.requestNewCaptureFolder()
+                        
+                 
+                       // logger.log("Creating capture path: \"\(String(describing: newCaptureDir))\"")
+                    let capturePath = model.captureDir!.path
+                        do {
+                            try FileManager.default.createDirectory(atPath: capturePath ,
+                                                                    withIntermediateDirectories: true)
+                           
+                            for i in selected.indices {
+                            
+                                try selected[i].image.pngData()?.write(to: imageUrl(in: model.captureDir!, id: UInt32(i)))
+                               
+                                model.captureFolderState!.captures.append(CaptureInfo(id: UInt32(i), captureDir: model.captureDir!))
+                            }
+                           
+                            model.captureFolderState!.requestLoad()
+                          
+                            
+                            isImporting = false
+                        } catch {
+                           // logger.error("Failed to create capturepath=\"\(capturePath)\" error=\(String(describing: error))")
+                        }
+                    
+                
+                   
+                
+                }) {
+                    ZStack {
+                       
+                       
+                        Text("Import Into App")
+                            .font(.custom("Karla-Medium", size: 20, relativeTo: .headline))
+                           
+                    }
+                } .buttonStyle(CTAButtonStyle2())
+            }
+               
+                }
+                }
+ 
+    let imageSuffix: String = ".HEIC"
+    func imageUrl(in captureDir: URL, id: UInt32) -> URL {
+        return captureDir.appendingPathComponent(CaptureInfo.photoIdString(for: id).appending(imageSuffix))
+    }
+    private func writeImage(to captureDir: URL, photo: UIImage, id: UInt32) -> Bool {
+        let imageUrl = CaptureInfo.imageUrl(in: captureDir, id: id)
+        print("Saving: \(imageUrl.path)...")
+        //logger.log("Depth Data = \(String(describing: photo.depthData))")
+        do {
+            try photo.pngData()!
+                .write(to: URL(fileURLWithPath: imageUrl.path))
+            return true
+        } catch {
+          //  logger.error("Can't write image to \"\(imageUrl.path)\" error=\(String(describing: error))")
+            return false
         }
     }
 }
@@ -399,4 +470,31 @@ struct ThumbnailImageView: View {
                         .stroke(Color.primary, lineWidth: thumbnailStrokeWidth))
             .shadow(radius: 10)
     }
+}
+import SwiftUI
+import UniformTypeIdentifiers
+
+struct InputDoument: FileDocument {
+
+    static var readableContentTypes: [UTType] { [.folder] }
+
+    var input: Data
+
+    init(input: Data) {
+        self.input = input
+    }
+
+    init(configuration: FileDocumentReadConfiguration) throws {
+        guard let data = configuration.file.regularFileContents
+            
+        else {
+            throw CocoaError(.fileReadCorruptFile)
+        }
+     input = data
+    }
+
+    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+        return FileWrapper(regularFileWithContents: input)
+    }
+
 }

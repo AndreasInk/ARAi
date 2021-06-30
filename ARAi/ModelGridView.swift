@@ -11,7 +11,7 @@ import RealityKit
 struct ModelGridView: View {
     let columns = [GridItem(.adaptive(minimum: 80)), GridItem(.adaptive(minimum: 80))]
     @State private var items = [Item]()
-    @State private var item = Item(id: UUID(), name: "", description: "", progress: 0.0, result: Data())
+    @State private var item = Item(id: UUID().uuidString, name: "", description: "", progress: 0.0, result: Data())
     @State private var i = 0
     @Binding var category: Category
     @State var entities = [Entity]()
@@ -28,6 +28,8 @@ struct ModelGridView: View {
     @State private var reload = false
     
     @State private var isLocal = true
+    
+    @Binding var categories: [Category]
     var body: some View {
         ZStack {
             Color("altText")
@@ -119,7 +121,7 @@ struct ModelGridView: View {
                     ZStack {
                      
                     
-                        ARMainView(items: $items, item: $item, i: $i, isOpen: $ready, isLocal: $isLocal)
+                        ARMainView(items: $items, item: $item, i: $i, isOpen: $ready, isLocal: $isLocal, userData: userData, categories: $categories)
                             .ignoresSafeArea()
                             .onDisappear() {
                                

@@ -28,7 +28,7 @@ struct Queue: Decodable {
 //    @State var shop = false
 //    @ObservedObject var captureFolderState: CaptureFolderState
 //    @Binding var categories: [Category]
-//    @State var item = Item(id: UUID(), name: "", description: "", progress: 0.0, result: Data())
+//    @State var item = Item(id: UUID().uuidString, name: "", description: "", progress: 0.0, result: Data())
 //    @State var showError = false
 //@State var success = false
 //    @State var export = false

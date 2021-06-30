@@ -194,7 +194,7 @@ struct CaptureGalleryView: View {
                     
                 }, timerQueue: SimpleTimer(interval: 5) {
                     
-                }, userData: userData, model: model, captureFolderState: captureFolderState, categories: $categories, upload: $upload)
+                }, userData: userData, model: model, captureFolderState: captureFolderState, categories: $categories, upload: $upload, id: model.captureDir?.path ?? UUID().uuidString)
                     .onAppear() {
                         model.pauseSession()
                     }

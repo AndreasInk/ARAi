@@ -5,20 +5,20 @@
 //  Created by Andreas on 6/29/21.
 //
 //
-//import Foundation
-//import RealityKit
-//import ARKit
-//import AVFoundation
-//import Combine
-//import MetalKit
-//class AppModel: ObservableObject {
-//    let die = PassthroughSubject<Void, Never>()
-//    let plusOne = PassthroughSubject<Void, Never>()
-////    let game = PassthroughSubject<Void, Never>()
-////    let saveScan = PassthroughSubject<Void, Never>()
-////    let scanning = PassthroughSubject<Void, Never>()
-////    let error = PassthroughSubject<Void, Never>()
-//}
+import Foundation
+import RealityKit
+import ARKit
+import AVFoundation
+import Combine
+import MetalKit
+class AppModel: ObservableObject {
+    let die = PassthroughSubject<Void, Never>()
+    let plusOne = PassthroughSubject<Void, Never>()
+//    let game = PassthroughSubject<Void, Never>()
+//    let saveScan = PassthroughSubject<Void, Never>()
+//    let scanning = PassthroughSubject<Void, Never>()
+//    let error = PassthroughSubject<Void, Never>()
+}
 //public var entities = [Entity]()
 //
 //extension CustomARView {

@@ -16,7 +16,7 @@ struct Category: Codable, Hashable {
 }
 
 struct Item: Codable, Hashable {
-    var id: UUID
+    var id: String
     var name: String
     var description: String
     var progress: Float

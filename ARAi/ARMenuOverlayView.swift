@@ -18,13 +18,19 @@ struct ARMenuOverlayView: View {
     @State var animateButtons = false
     @State var share = false
     @State var export = false
+    @State var shop = false
     @Binding var reload: Bool
     @Binding var isLocal: Bool
     @State var url = URL(string: "")
+    @ObservedObject var userData: UserData
+    @Binding var categories: [Category]
     var body: some View {
         HStack {
-            Spacer()
-        
+           
+           
+               
+                Spacer()
+          
         VStack {
            
             
@@ -36,10 +42,21 @@ struct ARMenuOverlayView: View {
             }) {
                 Image(systemName: showButtons ? "arrow.up" : "arrow.down")
                     .font(.largeTitle)
-                    .foregroundColor(.black)
+                    .foregroundColor(.white)
                     .padding()
-                    .background(RoundedRectangle(cornerRadius: 25).foregroundColor(.white.opacity(0.9)))
-            }  .buttonStyle(CTAButtonStyle())
+                    .background( LinearGradient(gradient: Gradient(colors:  [Color("w2"), Color("w1")]), startPoint: .topLeading, endPoint: .bottom).clipShape(RoundedRectangle(cornerRadius: 25)) .opacity(0.9)
+                                    .frame(maxWidth: 115, maxHeight: 150)
+                                    .shadow(
+                                        color:Color("w2").opacity( 0.2),
+                                      radius: 18,
+                                      x: -18,
+                                      y: -18)
+                                    .shadow(
+                                        color: Color("w1").opacity( 0.2),
+                                      radius: 14,
+                                      x: 14,
+                                        y: 14))
+            } .buttonStyle(CTAButtonStyle())
                 
            
             
@@ -171,7 +188,11 @@ struct ARMenuOverlayView: View {
                     
                    
                    
+                    if userData.scans == 0 {
+                        shop = true
+                    } else {
                     export.toggle()
+                    }
                     
                     
                 }) {
@@ -192,6 +213,7 @@ struct ARMenuOverlayView: View {
                                           x: 14,
                                             y: 14))
                 } .buttonStyle(CTAButtonStyle())
+                    
                     if share {
                     Button(action: {
 //                        do {
@@ -234,15 +256,56 @@ struct ARMenuOverlayView: View {
                
                 Spacer()
                 .sheet(isPresented: $export) {
-                  ShareSheet(
-                    activityItems: [isLocal ? getDocumentsDirectory().appendingPathComponent("\(item.id).usdz") : Bundle.main.url(forResource: item.name, withExtension: "reality")!  ],
-                    excludedActivityTypes: [.copyToPasteboard])
+                    VStack {
+                        Spacer()
+                        Image("ob3")
+                            .resizable()
+                            .scaledToFit()
+                            .padding()
+                            .clipShape(RoundedRectangle(cornerRadius: 25.0))
+                            .rotation3DEffect(.degrees(3), axis: (x: 0, y: 1, z: 0))
+                            .shadow(color: Color(.lightGray).opacity(0.2), radius: 40)
+                        Spacer()
+                        Text(!userData.itemIDs.contains(item.id) ? "Redeem Your Share?" : "Share")
+                            .font(.custom("Karla-Bold", size: 24, relativeTo: .headline))
+                            .multilineTextAlignment(.center)
+                        Text(!userData.itemIDs.contains(item.id) ? "By pressing the button below, you lose a share" : "")
+                            .font(.custom("Karla-Medium", size: 18, relativeTo: .headline))
+                            .multilineTextAlignment(.center)
+                        Spacer()
+                        Button(action: {
+                            share = true
+                        }) {
+                            ZStack {
+                               
+                               
+                                Text("Share")
+                                    .font(.custom("Karla-Medium", size: 20, relativeTo: .headline))
+                                   
+                            }
+                        } .buttonStyle(CTAButtonStyle2())
+                    }
+                    .sheet(isPresented: $share) {
+                        ShareSheet(
+                          activityItems: [isLocal ? getDocumentsDirectory().appendingPathComponent("\(item.id).usdz") : Bundle.main.url(forResource: item.name, withExtension: "reality")!  ],
+                          excludedActivityTypes: [.copyToPasteboard])
+                            .onAppear() {
+                                if !userData.itemIDs.contains(item.id) {
+                                    userData.scans -= 1
+                                    userData.itemIDs.append(item.id)
+                                }
+                            }
+                    }
+                    
                 }
             
-        } .padding()
+        }
         } 
             .animation(.spring())
             .transition(.move(edge: .bottom))
+            .sheet(isPresented: $shop) {
+                StoreView(userData: userData, categories: categories)
+            }
     }
     func getDocumentsDirectory() -> URL {
            // find all possible documents directories for this user

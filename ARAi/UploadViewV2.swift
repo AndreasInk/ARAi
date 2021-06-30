@@ -24,7 +24,7 @@
 //    @State private var destination = Bundle.main.url(forResource: "banana", withExtension: "usdz")!
 //
 //    @State private var prints = [Print]()
-//    @State private var item = Item(id: UUID(), name: "", description: "", progress: 0.0, result: Data())
+//    @State private var item = Item(id: UUID().uuidString, name: "", description: "", progress: 0.0, result: Data())
 //    @State private var progress = 0.0
 //    @State private var userID = UUID().uuidString
 //
@@ -671,7 +671,7 @@
 //    @State private var destination = Bundle.main.url(forResource: "banana", withExtension: "usdz")!
 //
 //    @State private var prints = [Print]()
-//    @State private var item = Item(id: UUID(), name: "", description: "", progress: 0.0, result: Data())
+//    @State private var item = Item(id: UUID().uuidString, name: "", description: "", progress: 0.0, result: Data())
 //    @State private var progress = 0.0
 //    @State private var userID = UUID().uuidString
 //
@@ -1281,7 +1281,7 @@ struct UploadViewV2: View {
     @State private var destination = Bundle.main.url(forResource: "banana", withExtension: "usdz")!
     
     @State private var prints = [Print]()
-    @State private var item = Item(id: UUID(), name: "", description: "", progress: 0.0, result: Data())
+    @State private var item = Item(id: UUID().uuidString, name: "", description: "", progress: 0.0, result: Data())
     @State private var progress = 0.0
     @State private var userID = UUID().uuidString
     
@@ -1298,6 +1298,7 @@ struct UploadViewV2: View {
     
     @State private var i = 0
     
+   
 
     @State private var index = 0
     
@@ -1306,6 +1307,8 @@ struct UploadViewV2: View {
     @State var reload = false
     
     @State var isLocal = true
+    
+    @State  var id = UUID().uuidString
     var body: some View {
         ZStack {
             if preload {
@@ -1335,7 +1338,9 @@ struct UploadViewV2: View {
                 .resizable()
                 .scaledToFit()
                 .padding()
-               
+                .onAppear() {
+                    item.id = id
+                }
             Text("Once uploaded, the process can take 5-10 minutes or more depending on the queue length.")
                 .font(.custom("Karla-Medium", size: 18, relativeTo: .headline))
                 .multilineTextAlignment(.center)
@@ -1356,9 +1361,7 @@ struct UploadViewV2: View {
             Button(action: {
                 withAnimation(.easeInOut) {
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                    if userData.scans == 0 {
-                        shop = true
-                    } else {
+                   
                         if item.name.isEmpty {
                             showError = true
                         } else {
@@ -1403,13 +1406,13 @@ struct UploadViewV2: View {
                             }
                     }
                     }
-                }
+                
                 
             
             }) {
                 ZStack {
                    
-                    Text(userData.scans != 0 ? (userData.itemIDs.contains("\(captureFolderState.captures.first?.id)") ? "Reupload Without Redeeming" : "Redeem Scan To Upload") : "Purchase Scans In Shop")
+                    Text("Upload")
                         .onAppear() {
                             let url = self.getDocumentsDirectory().appendingPathComponent("categories.txt")
                                                                      do {
@@ -1480,10 +1483,7 @@ struct UploadViewV2: View {
                     .padding()
                     .onAppear() {
                        
-                        if !userData.itemIDs.contains(model.captureDir!.relativePath) {
-                            userData.scans -= 1
-                            userData.itemIDs.append(model.captureDir!.relativePath)
-                        }
+                       
                        
                                                                 
                         index = categories.firstIndex(where: { $0.name == "Your Models" }) ?? 0
@@ -1574,7 +1574,7 @@ ProgressView(value: progress)
                     .padding()
            
                 .sheet(isPresented: $showModel) {
-                    ARMainView(items: $categories[index].items, item: $item, i: $i, isOpen: $showModel, isLocal: $isLocal)
+                    ARMainView(items: $categories[index].items, item: $item, i: $i, isOpen: $showModel, isLocal: $isLocal, userData: userData, categories: $categories)
                 }
             
             }

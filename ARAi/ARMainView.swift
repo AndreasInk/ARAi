@@ -16,6 +16,8 @@ struct ARMainView: View {
     @State var nonAR2 = true
     @State var reload = false
     @Binding var isLocal: Bool
+    @ObservedObject var userData: UserData
+    @Binding var categories: [Category]
     var body: some View {
         ZStack {
             
@@ -58,7 +60,7 @@ struct ARMainView: View {
                 
             
                 
-            ARMenuOverlayView(items: $items, item: $item, i: $i, isOpen: $isOpen, nonAR: $nonAR, reload: $reload, isLocal: $isLocal)
+            ARMenuOverlayView(items: $items, item: $item, i: $i, isOpen: $isOpen, nonAR: $nonAR, reload: $reload, isLocal: $isLocal, userData: userData, categories: $categories)
                 .onAppear() {
                     if item.name == "" {
                         item = items.last ?? item
