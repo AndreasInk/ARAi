@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		E10675B3268CE22C00C3A5D3 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10675B2268CE22C00C3A5D3 /* ImagePicker.swift */; };
-		E11B6F19268BEA8B00E66DA0 /* Bird.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = E11B6F18268BEA8B00E66DA0 /* Bird.rcproject */; };
-		E11B6F1B268BEDB100E66DA0 /* Game.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = E11B6F1A268BEDB100E66DA0 /* Game.rcproject */; };
 		E1785248267B9C7800908D06 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1785247267B9C7800908D06 /* ContentView.swift */; };
 		E17FF15C268A9935000C4283 /* ARMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17FF15B268A9935000C4283 /* ARMainView.swift */; };
 		E17FF15E268A995F000C4283 /* ARMenuOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17FF15D268A995F000C4283 /* ARMenuOverlayView.swift */; };
@@ -119,8 +117,6 @@
 
 /* Begin PBXFileReference section */
 		E10675B2268CE22C00C3A5D3 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		E11B6F18268BEA8B00E66DA0 /* Bird.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; name = Bird.rcproject; path = ../../../Desktop/Bird.rcproject; sourceTree = "<group>"; };
-		E11B6F1A268BEDB100E66DA0 /* Game.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Game.rcproject; sourceTree = "<group>"; };
 		E1785247267B9C7800908D06 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E17FF15B268A9935000C4283 /* ARMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMainView.swift; sourceTree = "<group>"; };
 		E17FF15D268A995F000C4283 /* ARMenuOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMenuOverlayView.swift; sourceTree = "<group>"; };
@@ -285,8 +281,6 @@
 				ED252CE8267B978E00846256 /* ARView.swift */,
 				E1785247267B9C7800908D06 /* ContentView.swift */,
 				ED252CD9267B978400846256 /* ARViewContainer.swift */,
-				E11B6F1A268BEDB100E66DA0 /* Game.rcproject */,
-				E11B6F18268BEA8B00E66DA0 /* Bird.rcproject */,
 				ED252CB9267B977B00846256 /* AsyncImageHelpers.swift */,
 				ED252CB4267B977A00846256 /* Banana.reality */,
 				E1F19B292681999200E64359 /* Blank.rcproject */,
@@ -585,12 +579,10 @@
 				E1A4636E268BC9CF00616623 /* CustomARView.swift in Sources */,
 				ED252CF5267B978F00846256 /* AsyncImageHelpers.swift in Sources */,
 				ED252D14267B978F00846256 /* CaptureInfo.swift in Sources */,
-				E11B6F19268BEA8B00E66DA0 /* Bird.rcproject in Sources */,
 				ED252D1C267B978F00846256 /* UserData.swift in Sources */,
 				ED252D1E267B978F00846256 /* LeadingTextView.swift in Sources */,
 				ED252CF2267B978F00846256 /* CaptureFolderState.swift in Sources */,
 				ED252D16267B978F00846256 /* ModelApp.swift in Sources */,
-				E11B6F1B268BEDB100E66DA0 /* Game.rcproject in Sources */,
 				E10675B3268CE22C00C3A5D3 /* ImagePicker.swift in Sources */,
 				E1785248267B9C7800908D06 /* ContentView.swift in Sources */,
 				ED252D26267B978F00846256 /* CameraPreviewView.swift in Sources */,

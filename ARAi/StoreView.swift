@@ -23,7 +23,7 @@ struct StoreView: View {
         VStack {
             HStack {
                 Spacer()
-                Text("Scans left: ")
+                Text("Downloads left: ")
                     .font(.custom("Karla-Medium", size: 18, relativeTo: .headline))
                 Text("\(userData.scans)")
                     .font(.custom("Karla-Medium", size: 18, relativeTo: .headline))
@@ -45,9 +45,9 @@ struct StoreView: View {
 //                    StoreCardView(title: "One Free Scan", text: "Unlock", price: 0.00, image: "working", audioName: "", userData: userData, model: model)
 //                   
                 }
-                StoreCardView(title: "One Scan", text: "Buy", price: 0.99, image: "working", audioName: "", userData: userData, categories: categories)
+                StoreCardView(title: "One Downloads", text: "Buy", price: 0.99, image: "working", audioName: "", userData: userData, categories: categories)
                    
-                StoreCardView(title: "Three Scans", text: "Buy", price: 1.99, image: "working", audioName: "", userData: userData, categories: categories)
+                StoreCardView(title: "Three Downloads", text: "Buy", price: 1.99, image: "working", audioName: "", userData: userData, categories: categories)
                    
             
             }

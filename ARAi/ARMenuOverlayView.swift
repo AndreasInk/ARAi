@@ -186,13 +186,9 @@ struct ARMenuOverlayView: View {
                 HStack {
                 Button(action: {
                     
+                    export = true
                    
                    
-                    if userData.scans == 0 {
-                        shop = true
-                    } else {
-                    export.toggle()
-                    }
                     
                     
                 }) {
@@ -266,20 +262,32 @@ struct ARMenuOverlayView: View {
                             .rotation3DEffect(.degrees(3), axis: (x: 0, y: 1, z: 0))
                             .shadow(color: Color(.lightGray).opacity(0.2), radius: 40)
                         Spacer()
-                        Text(!userData.itemIDs.contains(item.id) ? "Redeem Your Share?" : "Share")
+                        Text(!userData.itemIDs.contains(item.id) ? (userData.scans == 0 ? "Tap Below to Purchase More Downloads" : "Redeem One Download?") : "Download Your Model!")
                             .font(.custom("Karla-Bold", size: 24, relativeTo: .headline))
                             .multilineTextAlignment(.center)
-                        Text(!userData.itemIDs.contains(item.id) ? "By pressing the button below, you lose a share" : "")
+                            .padding()
+                        Text(!userData.itemIDs.contains(item.id) ? "Once you download one scan, you can take more photos and reupload them, then download your revisions as many times as you like" : "")
                             .font(.custom("Karla-Medium", size: 18, relativeTo: .headline))
                             .multilineTextAlignment(.center)
+                            .padding()
                         Spacer()
                         Button(action: {
+                            if userData.itemIDs.contains(item.id) {
                             share = true
+                            } else {
+                                if userData.scans == 0 {
+                                    shop = true
+                                } else {
+                                share.toggle()
+                                }
+                                
+                            }
+                            
                         }) {
                             ZStack {
                                
                                
-                                Text("Share")
+                                Text(userData.itemIDs.contains(item.id) ? "Download" : (userData.scans == 0 ? "Shop" : "Download"))
                                     .font(.custom("Karla-Medium", size: 20, relativeTo: .headline))
                                    
                             }
@@ -295,8 +303,11 @@ struct ARMenuOverlayView: View {
                                     userData.itemIDs.append(item.id)
                                 }
                             }
+                        
                     }
-                    
+                    .sheet(isPresented: $shop) {
+                        StoreView(userData: userData, categories: categories)
+                    }
                 }
             
         }

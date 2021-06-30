@@ -77,7 +77,7 @@ struct StoreCardView: View {
 //                    }
                     }
                     
-                    if title == "One Scan" {
+                    if title == "One Download" {
                         
                         SwiftyStoreKit.purchaseProduct("com.ai.model.one", quantity: 1, atomically: true) { result in
                             switch result {
@@ -103,7 +103,7 @@ struct StoreCardView: View {
                         }
                        
                     }
-                    if title == "Three Scans" {
+                    if title == "Three Downloads" {
                         
                         SwiftyStoreKit.purchaseProduct("com.ai.model.three", quantity: 1, atomically: true) { result in
                             switch result {
