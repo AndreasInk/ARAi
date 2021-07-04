@@ -194,7 +194,7 @@ struct CaptureGalleryView: View {
                     
                 }, timerQueue: SimpleTimer(interval: 5) {
                     
-                }, userData: userData, model: model, captureFolderState: captureFolderState, categories: $categories, upload: $upload, id: model.captureDir?.path ?? UUID().uuidString)
+                }, userData: userData, model: model, captureFolderState: captureFolderState, categories: $categories, upload: $upload, id: model.captureFolderState?.captureDir?.lastPathComponent ?? UUID().uuidString)
                     .onAppear() {
                         model.pauseSession()
                     }
@@ -360,6 +360,8 @@ struct MetadataExistenceView: View {
 
 /// This is the view the app shows when the user taps on a `GalleryCell` thumbnail. It asynchronously
 /// loads the full-size image and displays it full-screen.
+///
+
 struct FullSizeImageView: View {
     let captureInfo: CaptureInfo
     var publisher: AnyPublisher<CaptureInfo.FileExistence, Never>
@@ -373,12 +375,16 @@ struct FullSizeImageView: View {
             .replaceError(with: CaptureInfo.FileExistence())
             .eraseToAnyPublisher()
     }
-    
+    @State var showCropView = false
     var body: some View {
         VStack {
+            HStack {
             Text(captureInfo.imageUrl.lastPathComponent)
                 .font(.caption)
                 .padding()
+               
+                        
+            }
             GeometryReader { geometryReader in
                 AsyncImageView(url: captureInfo.imageUrl)
                     .frame(width: geometryReader.size.width, height: geometryReader.size.height)

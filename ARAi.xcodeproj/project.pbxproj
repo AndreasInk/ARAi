@@ -11,11 +11,14 @@
 		E1785248267B9C7800908D06 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1785247267B9C7800908D06 /* ContentView.swift */; };
 		E17FF15C268A9935000C4283 /* ARMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17FF15B268A9935000C4283 /* ARMainView.swift */; };
 		E17FF15E268A995F000C4283 /* ARMenuOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17FF15D268A995F000C4283 /* ARMenuOverlayView.swift */; };
+		E189F897268DAAC7008E1C46 /* pizza2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E189F896268DAAC7008E1C46 /* pizza2.usdz */; };
+		E189F89B268DC509008E1C46 /* SceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E189F89A268DC509008E1C46 /* SceneView.swift */; };
 		E199408E26846A66000772AB /* Blank.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = E1F19B292681999200E64359 /* Blank.rcproject */; };
 		E1A4636C268BC9AE00616623 /* BirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A4636B268BC9AE00616623 /* BirdView.swift */; };
 		E1A4636E268BC9CF00616623 /* CustomARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A4636D268BC9CF00616623 /* CustomARView.swift */; };
-		E1A46371268BCA2A00616623 /* RealityUI in Frameworks */ = {isa = PBXBuildFile; productRef = E1A46370268BCA2A00616623 /* RealityUI */; };
 		E1A46373268BCF5300616623 /* ARViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A46372268BCF5300616623 /* ARViews.swift */; };
+		E1C04994268DA1860070462E /* PointCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C04993268DA1850070462E /* PointCloud.swift */; };
+		E1C04996268DA2310070462E /* PointCloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C04995268DA2310070462E /* PointCloudView.swift */; };
 		E1DA5986267D498000ACD520 /* UploadViewV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DA5985267D498000ACD520 /* UploadViewV2.swift */; };
 		E1DA5988267D4DCD00ACD520 /* SimpleTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DA5987267D4DCD00ACD520 /* SimpleTimer.swift */; };
 		ED252C83267B975E00846256 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED252C82267B975E00846256 /* AppDelegate.swift */; };
@@ -39,7 +42,6 @@
 		ED252CF8267B978F00846256 /* PhotoCaptureDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED252CBC267B977B00846256 /* PhotoCaptureDelegate.swift */; };
 		ED252CF9267B978F00846256 /* ARGestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED252CBD267B977B00846256 /* ARGestures.swift */; };
 		ED252CFA267B978F00846256 /* Box3DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED252CBE267B977B00846256 /* Box3DView.swift */; };
-		ED252CFB267B978F00846256 /* Microchip.reality in Resources */ = {isa = PBXBuildFile; fileRef = ED252CBF267B977D00846256 /* Microchip.reality */; };
 		ED252CFC267B978F00846256 /* Wipes.reality in Resources */ = {isa = PBXBuildFile; fileRef = ED252CC0267B977E00846256 /* Wipes.reality */; };
 		ED252CFD267B978F00846256 /* Pizza.reality in Resources */ = {isa = PBXBuildFile; fileRef = ED252CC1267B978000846256 /* Pizza.reality */; };
 		ED252CFE267B978F00846256 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED252CC2267B978000846256 /* FirebaseStorageManager.swift */; };
@@ -81,7 +83,6 @@
 		ED252D26267B978F00846256 /* CameraPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED252CEC267B978F00846256 /* CameraPreviewView.swift */; };
 		ED252D27267B978F00846256 /* InfoPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED252CED267B978F00846256 /* InfoPanelView.swift */; };
 		ED252D2A267B982700846256 /* SwiftyStoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = ED252D29267B982700846256 /* SwiftyStoreKit */; };
-		ED252D2D267B986B00846256 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = ED252D2C267B986B00846256 /* ZIPFoundation */; };
 		EDBC74D5267B9B0200F7E6EB /* Karla-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDBC74C7267B9B0100F7E6EB /* Karla-BoldItalic.ttf */; };
 		EDBC74D6267B9B0200F7E6EB /* Karla-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDBC74C8267B9B0100F7E6EB /* Karla-MediumItalic.ttf */; };
 		EDBC74D7267B9B0200F7E6EB /* Karla-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDBC74C9267B9B0100F7E6EB /* Karla-ExtraLightItalic.ttf */; };
@@ -120,9 +121,13 @@
 		E1785247267B9C7800908D06 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E17FF15B268A9935000C4283 /* ARMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMainView.swift; sourceTree = "<group>"; };
 		E17FF15D268A995F000C4283 /* ARMenuOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMenuOverlayView.swift; sourceTree = "<group>"; };
+		E189F896268DAAC7008E1C46 /* pizza2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = pizza2.usdz; sourceTree = "<group>"; };
+		E189F89A268DC509008E1C46 /* SceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneView.swift; sourceTree = "<group>"; };
 		E1A4636B268BC9AE00616623 /* BirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdView.swift; sourceTree = "<group>"; };
 		E1A4636D268BC9CF00616623 /* CustomARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomARView.swift; sourceTree = "<group>"; };
 		E1A46372268BCF5300616623 /* ARViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViews.swift; sourceTree = "<group>"; };
+		E1C04993268DA1850070462E /* PointCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointCloud.swift; sourceTree = "<group>"; };
+		E1C04995268DA2310070462E /* PointCloudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointCloudView.swift; sourceTree = "<group>"; };
 		E1DA5985267D498000ACD520 /* UploadViewV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewV2.swift; sourceTree = "<group>"; };
 		E1DA5987267D4DCD00ACD520 /* SimpleTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTimer.swift; sourceTree = "<group>"; };
 		E1F19B292681999200E64359 /* Blank.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Blank.rcproject; sourceTree = "<group>"; };
@@ -152,7 +157,6 @@
 		ED252CBC267B977B00846256 /* PhotoCaptureDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureDelegate.swift; sourceTree = "<group>"; };
 		ED252CBD267B977B00846256 /* ARGestures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARGestures.swift; sourceTree = "<group>"; };
 		ED252CBE267B977B00846256 /* Box3DView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Box3DView.swift; sourceTree = "<group>"; };
-		ED252CBF267B977D00846256 /* Microchip.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = Microchip.reality; sourceTree = "<group>"; };
 		ED252CC0267B977E00846256 /* Wipes.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = Wipes.reality; sourceTree = "<group>"; };
 		ED252CC1267B978000846256 /* Pizza.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pizza.reality; sourceTree = "<group>"; };
 		ED252CC2267B978000846256 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
@@ -216,8 +220,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED252D2A267B982700846256 /* SwiftyStoreKit in Frameworks */,
-				ED252D2D267B986B00846256 /* ZIPFoundation in Frameworks */,
-				E1A46371268BCA2A00616623 /* RealityUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +278,10 @@
 			isa = PBXGroup;
 			children = (
 				ED252C82267B975E00846256 /* AppDelegate.swift */,
+				E1C04993268DA1850070462E /* PointCloud.swift */,
+				E1C04995268DA2310070462E /* PointCloudView.swift */,
+				E189F89A268DC509008E1C46 /* SceneView.swift */,
+				E189F896268DAAC7008E1C46 /* pizza2.usdz */,
 				ED252C84267B975E00846256 /* SceneDelegate.swift */,
 				ED252CBD267B977B00846256 /* ARGestures.swift */,
 				ED252CE8267B978E00846256 /* ARView.swift */,
@@ -310,7 +316,6 @@
 				ED252CED267B978F00846256 /* InfoPanelView.swift */,
 				ED252CC3267B978000846256 /* Item.swift */,
 				ED252CE4267B978D00846256 /* LeadingTextView.swift */,
-				ED252CBF267B977D00846256 /* Microchip.reality */,
 				ED252CDC267B978500846256 /* ModelApp.swift */,
 				ED252CEA267B978E00846256 /* ModelGridView.swift */,
 				ED252CE1267B978500846256 /* ModelItemView.swift */,
@@ -394,8 +399,6 @@
 			name = ARAi;
 			packageProductDependencies = (
 				ED252D29267B982700846256 /* SwiftyStoreKit */,
-				ED252D2C267B986B00846256 /* ZIPFoundation */,
-				E1A46370268BCA2A00616623 /* RealityUI */,
 			);
 			productName = ARAi;
 			productReference = ED252C7F267B975E00846256 /* ARAi.app */;
@@ -470,8 +473,6 @@
 			mainGroup = ED252C76267B975E00846256;
 			packageReferences = (
 				ED252D28267B982700846256 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */,
-				ED252D2B267B986B00846256 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
-				E1A4636F268BCA2A00616623 /* XCRemoteSwiftPackageReference "RealityUI" */,
 			);
 			productRefGroup = ED252C80267B975E00846256 /* Products */;
 			projectDirPath = "";
@@ -504,7 +505,6 @@
 				EDBC74E1267B9B0200F7E6EB /* Karla-ExtraBold.ttf in Resources */,
 				EDBC74E2267B9B0200F7E6EB /* Karla-SemiBoldItalic.ttf in Resources */,
 				ED252CD0267B978400846256 /* banana.usdz in Resources */,
-				ED252CFB267B978F00846256 /* Microchip.reality in Resources */,
 				ED252CFD267B978F00846256 /* Pizza.reality in Resources */,
 				ED252CF0267B978F00846256 /* Banana.reality in Resources */,
 				ED252C8F267B975F00846256 /* LaunchScreen.storyboard in Resources */,
@@ -512,6 +512,7 @@
 				ED252D25267B978F00846256 /* Burger.reality in Resources */,
 				ED252CFC267B978F00846256 /* Wipes.reality in Resources */,
 				ED252C89267B975F00846256 /* Assets.xcassets in Resources */,
+				E189F897268DAAC7008E1C46 /* pizza2.usdz in Resources */,
 				ED252D00267B978F00846256 /* Toliet-Paper.reality in Resources */,
 				ED252CEF267B978F00846256 /* Broccoli.reality in Resources */,
 			);
@@ -563,6 +564,7 @@
 				ED252D27267B978F00846256 /* InfoPanelView.swift in Sources */,
 				ED252D12267B978F00846256 /* HomeView.swift in Sources */,
 				ED252D1A267B978F00846256 /* StoreView.swift in Sources */,
+				E1C04996268DA2310070462E /* PointCloudView.swift in Sources */,
 				ED252D05267B978F00846256 /* TriggerEveryTimer.swift in Sources */,
 				ED252D10267B978F00846256 /* CategoryView.swift in Sources */,
 				ED252CFE267B978F00846256 /* FirebaseStorageManager.swift in Sources */,
@@ -574,10 +576,12 @@
 				ED252D21267B978F00846256 /* CaptureGalleryView.swift in Sources */,
 				ED252CF1267B978F00846256 /* ButtonStyle.swift in Sources */,
 				ED252D06267B978F00846256 /* ImageLoader.swift in Sources */,
+				E189F89B268DC509008E1C46 /* SceneView.swift in Sources */,
 				ED252D23267B978F00846256 /* StatusView.swift in Sources */,
 				ED252D18267B978F00846256 /* HeaderView.swift in Sources */,
 				E1A4636E268BC9CF00616623 /* CustomARView.swift in Sources */,
 				ED252CF5267B978F00846256 /* AsyncImageHelpers.swift in Sources */,
+				E1C04994268DA1860070462E /* PointCloud.swift in Sources */,
 				ED252D14267B978F00846256 /* CaptureInfo.swift in Sources */,
 				ED252D1C267B978F00846256 /* UserData.swift in Sources */,
 				ED252D1E267B978F00846256 /* LeadingTextView.swift in Sources */,
@@ -766,7 +770,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"ARAi/Preview Content\"";
 				DEVELOPMENT_TEAM = 9NG3C5HP77;
 				ENABLE_PREVIEWS = YES;
@@ -791,7 +795,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"ARAi/Preview Content\"";
 				DEVELOPMENT_TEAM = 9NG3C5HP77;
 				ENABLE_PREVIEWS = YES;
@@ -935,14 +939,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E1A4636F268BCA2A00616623 /* XCRemoteSwiftPackageReference "RealityUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/maxxfrazer/RealityUI.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		ED252D28267B982700846256 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/bizz84/SwiftyStoreKit.git";
@@ -951,31 +947,13 @@
 				minimumVersion = 0.16.3;
 			};
 		};
-		ED252D2B267B986B00846256 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/weichsel/ZIPFoundation.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.12;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E1A46370268BCA2A00616623 /* RealityUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E1A4636F268BCA2A00616623 /* XCRemoteSwiftPackageReference "RealityUI" */;
-			productName = RealityUI;
-		};
 		ED252D29267B982700846256 /* SwiftyStoreKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = ED252D28267B982700846256 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */;
 			productName = SwiftyStoreKit;
-		};
-		ED252D2C267B986B00846256 /* ZIPFoundation */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = ED252D2B267B986B00846256 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
-			productName = ZIPFoundation;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

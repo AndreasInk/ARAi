@@ -1317,7 +1317,7 @@ struct UploadViewV2: View {
                     .onAppear() {
                         userData.reload += 1
                         preload = false
-                        
+                       // item.id = id
                     }
                     }
         VStack {
@@ -1339,7 +1339,9 @@ struct UploadViewV2: View {
                 .scaledToFit()
                 .padding()
                 .onAppear() {
-                    item.id = id
+                  
+                    item.id = "\( String(describing:  captureFolderState.captureDir!.lastPathComponent))"
+                    isLocal = true
                 }
             Text("Once uploaded, the process can take 5-10 minutes or more depending on the queue length.")
                 .font(.custom("Karla-Medium", size: 18, relativeTo: .headline))
@@ -1441,8 +1443,8 @@ struct UploadViewV2: View {
                    
                 } .padding()
             } .buttonStyle(CTAButtonStyle2())
-            Text(String(userData.scans) + " Scans Left")
-                .font(.custom("Karla-Medium", size: 16, relativeTo: .headline))
+//            Text(String(userData.scans) + " Scans Left")
+//                .font(.custom("Karla-Medium", size: 16, relativeTo: .headline))
                 
         } .sheet(isPresented: $shop) {
             StoreView(userData: userData, categories: categories)
@@ -1485,7 +1487,7 @@ struct UploadViewV2: View {
                        
                        
                        
-                                                                
+                       // item.id = id
                         index = categories.firstIndex(where: { $0.name == "Your Models" }) ?? 0
                         categories[index].items.append(item)
                                                let encoder = JSONEncoder()
@@ -1519,6 +1521,7 @@ struct UploadViewV2: View {
                 Button(action: {
                     success = false
                     showModel = true
+                  
                 }) {
                     ZStack {
                        
@@ -1600,7 +1603,7 @@ ProgressView(value: progress)
                          let note = try decoder.decode(Queue.self, from: data2)
                      queue = note
                      if note.queue.first == userID {
-                        
+                         DispatchQueue.main.asyncAfter(deadline: .now() + 20.0) {
                          let imgs = captureFolderState.captures.map{ $0.imageUrl }
                          let gravities = captureFolderState.captures.map{ $0.gravityUrl }
                         
@@ -1621,6 +1624,7 @@ ProgressView(value: progress)
                         
                         // DispatchQueue.main.asyncAfter(deadline: .now() + 30.0) {
                          timer.start()
+                         }
                      } else {
                          let index = note.queue.firstIndex(where: { $0 == userID })
                          if !prints.map{$0.process}.contains("\(index ?? 0)/\(note.queue.count - 1) in queue") {
@@ -1670,6 +1674,7 @@ ProgressView(value: progress)
                         if  note.process.lowercased().contains("id")  {
                            
                             getUSDZ(id: note.process.replacingOccurrences(of: "ID=", with: ""))
+                            item.id = note.process.replacingOccurrences(of: "ID=", with: "")
                             progress += 0.05
                             timer.cancel()
                            
@@ -1719,7 +1724,7 @@ ProgressView(value: progress)
                  let fileManager = FileManager()
                  let currentWorkingPath = getDocumentsDirectory()
                      var sourceURL = currentWorkingPath
-                     
+                  
                      let destination = getDocumentsDirectory().appendingPathComponent("\(item.id).usdz")
                  sourceURL.appendPathComponent("archive.zip")
 //                     if fileManager.fileExists(atPath: destination.path ) {

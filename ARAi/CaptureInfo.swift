@@ -30,7 +30,7 @@ struct CaptureInfo: Identifiable {
     
     /// This is a unique identifier for the capture sample.
     let id: UInt32
-    
+    let fullID = UUID().uuidString
     /// This is a URL pointing to the sample's parent directory.
     let captureDir: URL
     

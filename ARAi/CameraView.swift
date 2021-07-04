@@ -186,12 +186,12 @@ struct ScanToolbarView: View {
                         .foregroundColor(Color.blue)
                 }
                
-                Button(action: {
-                    isImporting = true
-                }) {
-                    Image(systemName: "arrow.down.square")
-                        .padding()
-                }
+//                Button(action: {
+//                    isImporting = true
+//                }) {
+//                    Image(systemName: "arrow.down.square")
+//                        .padding()
+//                }
             }
             
             if showInfo {

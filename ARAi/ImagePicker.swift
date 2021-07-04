@@ -20,7 +20,7 @@ struct CustomPicker : View {
         
         GeometryReader{_ in
             
-            VStack{
+            LazyVStack{
                 
 
                 if !self.grid.isEmpty{
@@ -37,7 +37,7 @@ struct CustomPicker : View {
                     
                     ScrollView(.vertical, showsIndicators: false) {
                         
-                        VStack(spacing: 20){
+                        LazyVStack(spacing: 20){
                             
                             ForEach(self.grid,id: \.self){i in
                                 
@@ -49,7 +49,7 @@ struct CustomPicker : View {
                                     }
                                 }
                             }
-                        }
+                        }  .frame(height: 400)
                         .padding(.bottom)
                     }
                     
@@ -67,7 +67,7 @@ struct CustomPicker : View {
                     }
                 }
             }
-           
+            .frame(height: 400)
             .background(Color.white)
             .cornerRadius(12)
         }
@@ -119,7 +119,7 @@ struct CustomPicker : View {
                         
                         PHCachingImageManager.default().requestImage(for: req[j], targetSize: CGSize(width: 150, height: 150), contentMode: .default, options: options) { (image, _) in
                             
-                            let data1 = Images(image: image!, selected: false, asset: req[j])
+                            let data1 = Images(image: (image ?? UIImage(systemName: "xmark")!), selected: false, asset: req[j])
                             
                             iteration.append(data1)
 
@@ -127,7 +127,7 @@ struct CustomPicker : View {
                     }
                 }
                     
-                self.grid.append(iteration)
+                self.grid.append(iteration.reversed())
             }
             
         }
