@@ -60,6 +60,7 @@ class ImageLoader {
                     promise(.success(image))
                 } catch ImageLoader.Error.noImage {
                     logger.error("noImage \(url.path)")
+                    
                     promise(.failure(ImageLoader.Error.noImage))
                 } catch ImageLoader.Error.noThumbnail {
                     logger.error("noThumbnail \(url.path)")

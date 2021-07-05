@@ -24,7 +24,7 @@ struct StoreCardView: View {
         "com.ai.model.three",
         "com.ai.model.energydrink"
     ]
-    
+    @Environment(\.presentationMode) private var presentation
     @State var categories: [Category]
     var body: some View {
         ZStack {
@@ -181,11 +181,7 @@ struct StoreCardView: View {
                 } .buttonStyle(CTAButtonStyle2())
               
             } .padding()
-                .sheet(isPresented: $upload, content: {
-                    NavigationView {
-                       CameraView( userData: userData, camera: $camera)
-                    }
-                })
+               
                 .sheet(isPresented: $success) {
                     ZStack {
                     VStack {
@@ -211,12 +207,13 @@ struct StoreCardView: View {
                         
                         Button(action: {
                             success = false
-                            upload = true
+                           
+                            presentation.wrappedValue.dismiss()
                         }) {
                             ZStack {
                                
                               
-                                Text("Start Taking Photos!")
+                                Text("Back to Downloading!")
                                     .font(.custom("Karla-Medium", size: 20, relativeTo: .headline))
                                     
                             }

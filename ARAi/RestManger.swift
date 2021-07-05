@@ -44,8 +44,7 @@ class RestManager {
                 completion(Results(withData: data,
                                    response: Response(fromURLResponse: response),
                                    error: error))
-            }
-            task.resume()
+            }.resume()
         }
     }
     
@@ -58,8 +57,7 @@ class RestManager {
             let task = session.dataTask(with: url, completionHandler: { (data, response, error) in
                 guard let data = data else { completion(nil); return }
                 completion(data)
-            })
-            task.resume()
+            }).resume()
         }
     }
     
@@ -87,8 +85,7 @@ class RestManager {
                                    response: Response(fromURLResponse: response),
                                    error: error),
                            failedFilenames)
-            })
-            task.resume()
+            }).resume()
         }
     }
     

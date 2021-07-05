@@ -86,7 +86,7 @@ struct AsyncThumbnailView: View {
             }
     }
 }
-import CropImageView
+//import CropImageView
 struct AsyncImageView: View {
     let url: URL
     @StateObject private var imageStore: AsyncImageStore
@@ -110,20 +110,20 @@ struct AsyncImageView: View {
     
     var body: some View {
         VStack {
-            Button(action: {
-                //imageStore.image.crop(withPath: UIBezierPath(cgPath: <#T##CGPath#>), andColor: UIColor.clear)
-                imageStore.image.ciImage?.cropped(to: CGRect(x: newPositionTopLeft.x, y: newPositionTopLeft.y, width: newPositionBottomRight.x, height: newPositionBottomRight.y))
-                              }) {
-                                  Image(systemName: "checkmark").resizable().frame(width: 24, height: 24)
-                                  .padding(20)
-                                  .background(Color(UIColor.systemBlue))
-                                  .foregroundColor(Color.white)
-                              }.clipShape(Circle())
-                                  .shadow(radius: 4)
+//            Button(action: {
+//                //imageStore.image.crop(withPath: UIBezierPath(cgPath: <#T##CGPath#>), andColor: UIColor.clear)
+//                imageStore.image.ciImage?.cropped(to: CGRect(x: newPositionTopLeft.x, y: newPositionTopLeft.y, width: newPositionBottomRight.x, height: newPositionBottomRight.y))
+//                              }) {
+//                                  Image(systemName: "checkmark").resizable().frame(width: 24, height: 24)
+//                                  .padding(20)
+//                                  .background(Color(UIColor.systemBlue))
+//                                  .foregroundColor(Color.white)
+//                              }.clipShape(Circle())
+//                                  .shadow(radius: 4)
         Image(uiImage: imageStore.image)
             .resizable()
             .aspectRatio(contentMode: .fill)
-            .overlay(getCorners())
+            //.overlay(getCorners())
             .onAppear() {
                 imageStore.loadImage()
             }
@@ -131,52 +131,52 @@ struct AsyncImageView: View {
         
         } .scaleEffect(0.7)
     }
-    private func getCorners() -> some View {
-
-           return
-           HStack {
-               VStack {
-                   ZStack {
-                       CropImageViewRectangle(
-                           currentPositionTopLeft: self.$currentPositionTopLeft,
-                           currentPositionTopRight: self.$currentPositionTopRight,
-                           currentPositionBottomLeft: self.$currentPositionBottomLeft,
-                           currentPositionBottomRight: self.$currentPositionBottomRight
-                       )
-
-                       GeometryReader { geometry in
-                           CropImageViewRectangleCorner(
-                               currentPosition: self.$currentPositionTopLeft,
-                               newPosition: self.$newPositionTopLeft,
-                               displacementX: 0,
-                               displacementY: 0
-                           )
-
-                           CropImageViewRectangleCorner(
-                               currentPosition: self.$currentPositionTopRight,
-                               newPosition: self.$newPositionTopRight,
-                               displacementX: geometry.size.width/1.7,
-                               displacementY: 0
-                           )
-
-                           CropImageViewRectangleCorner(
-                               currentPosition: self.$currentPositionBottomLeft,
-                               newPosition: self.$newPositionBottomLeft,
-                               displacementX: 0,
-                               displacementY: geometry.size.height/1.7
-                           )
-
-                           CropImageViewRectangleCorner(
-                               currentPosition: self.$currentPositionBottomRight,
-                               newPosition: self.$newPositionBottomRight,
-                               displacementX: geometry.size.width/1.7,
-                               displacementY: geometry.size.height/1.7
-                           )
-                       }
-}
-               }
-               }
-           }
+//    private func getCorners() -> some View {
+//
+//           return
+//           HStack {
+//               VStack {
+//                   ZStack {
+//                       CropImageViewRectangle(
+//                           currentPositionTopLeft: self.$currentPositionTopLeft,
+//                           currentPositionTopRight: self.$currentPositionTopRight,
+//                           currentPositionBottomLeft: self.$currentPositionBottomLeft,
+//                           currentPositionBottomRight: self.$currentPositionBottomRight
+//                       )
+//
+//                       GeometryReader { geometry in
+//                           CropImageViewRectangleCorner(
+//                               currentPosition: self.$currentPositionTopLeft,
+//                               newPosition: self.$newPositionTopLeft,
+//                               displacementX: 0,
+//                               displacementY: 0
+//                           )
+//
+//                           CropImageViewRectangleCorner(
+//                               currentPosition: self.$currentPositionTopRight,
+//                               newPosition: self.$newPositionTopRight,
+//                               displacementX: geometry.size.width/1.7,
+//                               displacementY: 0
+//                           )
+//
+//                           CropImageViewRectangleCorner(
+//                               currentPosition: self.$currentPositionBottomLeft,
+//                               newPosition: self.$newPositionBottomLeft,
+//                               displacementX: 0,
+//                               displacementY: geometry.size.height/1.7
+//                           )
+//
+//                           CropImageViewRectangleCorner(
+//                               currentPosition: self.$currentPositionBottomRight,
+//                               newPosition: self.$newPositionBottomRight,
+//                               displacementX: geometry.size.width/1.7,
+//                               displacementY: geometry.size.height/1.7
+//                           )
+//                       }
+//}
+//               }
+//               }
+//           }
 }
 struct CropImageViewRectangle: View {
     @Binding var currentPositionTopLeft: CGPoint

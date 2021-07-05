@@ -13,6 +13,7 @@ struct ModelItemView: View {
     @State private var entity = Entity()
     @State private var show3D = false
     @State var imgData = Data()
+   
     var body: some View {
         ZStack {
             Color("altText")
@@ -36,7 +37,8 @@ struct ModelItemView: View {
 //                NoCameraARViewContainer(entity: $entity)
 //                    .frame(width: 100, height: 100)
             } else {
-                Image(uiImage:  (imgData.isEmpty ? UIImage(named:item.name) : UIImage(data: imgData)) ?? UIImage())
+                Image(uiImage:  ((UIImage(named:item.name)?.pngData()?.isEmpty ?? true) ? UIImage(contentsOfFile: getDocumentsDirectory().appendingPathComponent("/Captures/" + item.id + "/IMG_0001.HEIC").path) ?? UIImage(named: "ob3")! : UIImage(named:item.name)) ?? UIImage(named: "ob3")!)
+              
                 .resizable()
                 .scaledToFit()
                 .clipShape(RoundedRectangle(cornerRadius: 25))

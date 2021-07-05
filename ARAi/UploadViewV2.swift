@@ -1340,7 +1340,7 @@ struct UploadViewV2: View {
                 .padding()
                 .onAppear() {
                   
-                    item.id = "\( String(describing:  captureFolderState.captureDir!.lastPathComponent))"
+                    item.id = captureFolderState.captureDir!.lastPathComponent
                     isLocal = true
                 }
             Text("Once uploaded, the process can take 5-10 minutes or more depending on the queue length.")
@@ -1498,12 +1498,13 @@ struct UploadViewV2: View {
                                                        do {
                                                            let url = self.getDocumentsDirectory().appendingPathComponent("categories.txt")
                                                            try json.write(to: url, atomically: false, encoding: String.Encoding.utf8)
-//                                                           if let image = UIImage(contentsOfFile: captureFolderState.captures.last?.imageUrl.path ?? getDocumentsDirectory().appendingPathComponent("x.png").path) {
-//                                                               if let data = image.pngData() {
-//                                                                   let filename = getDocumentsDirectory().appendingPathComponent("\(item.id).png")
-//                                                                   try? data.write(to: filename)
-//
-//                                                               }
+                                                           if let image = UIImage(contentsOfFile: captureFolderState.captures.last?.imageUrl.path ?? getDocumentsDirectory().appendingPathComponent("x.png").path) {
+                                                               if let data = image.pngData() {
+                                                                   let filename = getDocumentsDirectory().appendingPathComponent((item.id) + ".png")
+                                                                   try? data.write(to: filename)
+
+                                                               }
+                                                           }
 //
 //                                                           }
                                                        } catch {
@@ -1614,8 +1615,11 @@ ProgressView(value: progress)
                              pairs.append(PairOfData(id: UUID().uuidString, img: imgs[i], gravity: gravities.indices.contains(i) ? gravities[i] : imgs[i] ))
                              }
                           
-                         
+                            
+                                
                                  uploadMultipleFiles(urls: pairs)
+                                 
+                             
                              //}
                          sendPrint(text: "Uploaded Images")
                       
@@ -1641,8 +1645,8 @@ ProgressView(value: progress)
                  } catch {
                  }
                      }
-                 }
-                 task.resume()
+                 } .resume()
+                 
                  }
                 
             
@@ -1674,7 +1678,8 @@ ProgressView(value: progress)
                         if  note.process.lowercased().contains("id")  {
                            
                             getUSDZ(id: note.process.replacingOccurrences(of: "ID=", with: ""))
-                            item.id = note.process.replacingOccurrences(of: "ID=", with: "")
+                            #warning("removed")
+                            //item.id = note.process.replacingOccurrences(of: "ID=", with: "")
                             progress += 0.05
                             timer.cancel()
                            
@@ -1696,8 +1701,8 @@ ProgressView(value: progress)
                        // sendPrint(text: error.localizedDescription)
                     }
                 }
-            }
-            task.resume()
+            } .resume()
+          
         }
         
     }
@@ -1725,7 +1730,7 @@ ProgressView(value: progress)
                  let currentWorkingPath = getDocumentsDirectory()
                      var sourceURL = currentWorkingPath
                   
-                     let destination = getDocumentsDirectory().appendingPathComponent("\(item.id).usdz")
+                    let destination = getDocumentsDirectory().appendingPathComponent(item.id + ".usdz")
                  sourceURL.appendPathComponent("archive.zip")
 //                     if fileManager.fileExists(atPath: destination.path ) {
 //                         try? fileManager.removeItem(atPath: destination.path )
@@ -1784,26 +1789,27 @@ ProgressView(value: progress)
         
         
     }
+    @State private var infos = [RestManager.FileInfo]()
     func uploadMultipleFiles(urls: [PairOfData]) {
-        
+      
         for i in urls.indices {
-            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i)) {
-                var infos = [RestManager.FileInfo]()
-              var newURL = self.getDocumentsDirectory().appendingPathComponent(String(i) + ".HEIC")
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i/5)) {
+                infos.removeAll()
+           
             if urls[i].img.lastPathComponent.contains("HEIC") {
   
               do {
-                  try UIImage(contentsOfFile: urls[i].img.path)?.pngData()!.write(to: newURL)
+                 
                   let imageFileInfo = RestManager.FileInfo(withFileURL: urls[i].img, filename: String(i) + ".HEIC", name: "uploadedFile", mimetype: "image/HEIC")
                   infos.append(imageFileInfo)
               } catch {
   
               }
               } else if urls[i].gravity.lastPathComponent.lowercased().contains("txt") {
-                   newURL = self.getDocumentsDirectory().appendingPathComponent(String(i) + ".txt")
+               
                   do {
-                      try Data(contentsOf: urls[i].gravity).write(to: newURL)
-                      let imageFileInfo = RestManager.FileInfo(withFileURL: newURL, filename: String(i) + ".txt", name: "uploadedFile", mimetype: "text/plain")
+                    
+                      let imageFileInfo = RestManager.FileInfo(withFileURL: urls[i].gravity, filename: String(i) + ".txt", name: "uploadedFile", mimetype: "text/plain")
                       infos.append(imageFileInfo)
                   } catch {
   
@@ -1876,4 +1882,11 @@ struct PairOfData {
     var id: String
     var img: URL
     var gravity: URL
+}
+extension Array {
+    func chunked(into size: Int) -> [[Element]] {
+        return stride(from: 0, to: count, by: size).map {
+            Array(self[$0 ..< Swift.min($0 + size, count)])
+        }
+    }
 }

@@ -147,9 +147,7 @@ struct CaptureButtonPanelView: View {
                 Image(systemName: "camera")
                     .font(.largeTitle)
                     .foregroundColor(Color.white)
-                    .frame(width: CaptureButton.squareDiameter,
-                           height: CaptureButton.squareDiameter,
-                           alignment: .center)
+                    
                     .cornerRadius(5)
                     .rotation3DEffect(.degrees(animate ? 180 : 360), axis: (x: 0, y:  1, z: 0))
                 
@@ -167,7 +165,7 @@ struct ScanToolbarView: View {
     @ObservedObject var model: CameraViewModel
     @Binding var showInfo: Bool
     @State var isImporting = false
-    @State var selected : [SelectedImages] = []
+  
     var body: some View {
         ZStack {
             HStack {
@@ -206,50 +204,7 @@ struct ScanToolbarView: View {
             }
                 
         }
-        .sheet(isPresented: $isImporting) {
-            VStack {
-                CustomPicker(selected: self.$selected, show: self.$isImporting)
-                Button(action: {
-                    
-                    model.requestNewCaptureFolder()
-                        
-                 
-                       // logger.log("Creating capture path: \"\(String(describing: newCaptureDir))\"")
-                    let capturePath = model.captureDir!.path
-                        do {
-                            try FileManager.default.createDirectory(atPath: capturePath ,
-                                                                    withIntermediateDirectories: true)
-                           
-                            for i in selected.indices {
-                            
-                                try selected[i].image.pngData()?.write(to: imageUrl(in: model.captureDir!, id: UInt32(i)))
-                               
-                                model.captureFolderState!.captures.append(CaptureInfo(id: UInt32(i), captureDir: model.captureDir!))
-                            }
-                           
-                            model.captureFolderState!.requestLoad()
-                          
-                            
-                            isImporting = false
-                        } catch {
-                           // logger.error("Failed to create capturepath=\"\(capturePath)\" error=\(String(describing: error))")
-                        }
-                    
-                
-                   
-                
-                }) {
-                    ZStack {
-                       
-                       
-                        Text("Import Into App")
-                            .font(.custom("Karla-Medium", size: 20, relativeTo: .headline))
-                           
-                    }
-                } .buttonStyle(CTAButtonStyle2())
-            }
-               
-                }
+       
                 }
  
     let imageSuffix: String = ".HEIC"

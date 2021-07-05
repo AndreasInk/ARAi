@@ -222,9 +222,10 @@ struct NewSessionButtonView: View {
     
     /// This is an environment variable that the capture gallery view uses to store state.
     @Environment(\.presentationMode) private var presentation
-    
+
     var usingCurrentCaptureFolder: Bool = true
-    
+    @State private var photoPickerIsPresented = false
+      @State var pickerResult: [UIImage] = []
     var body: some View {
         // Only show the new session if the user is viewing the current
         // capture directory.
@@ -235,13 +236,41 @@ struct NewSessionButtonView: View {
                     // Navigate back to the main scan page.
                     presentation.wrappedValue.dismiss()
                 }) {
-                    Label("New Session", systemImage: "camera")
+                    Label("New Empty Session", systemImage: "camera")
+                }
+                Button(action: {
+                    model.requestNewCaptureFolder()
+                    photoPickerIsPresented = true
+                   
+                }) {
+                    Label("Session From Photos", systemImage: "photo")
                 }
             }, label: {
                 Image(systemName: "plus.circle")
             })
+                .sheet(isPresented: $photoPickerIsPresented) {
+                        PhotoPicker(pickerResult: $pickerResult,
+                                    isPresented: $photoPickerIsPresented)
+                       
+                      }
+                .onChange(of: pickerResult) { value in
+                    for i in pickerResult.indices {
+                        do {
+                                                  try pickerResult[i].pngData()?.write(to: imageUrl(in: model.captureDir!, id: UInt32(i)))
+                                                 
+                                                  model.captureFolderState!.captures.append(CaptureInfo(id: UInt32(i), captureDir: model.captureDir!))
+                        
+                            model.captureFolderState?.requestLoad()
+                        } catch {
+                        }
+                        }
+                }
         }
+        
     }
+    func imageUrl(in captureDir: URL, id: UInt32) -> URL {
+           return captureDir.appendingPathComponent(CaptureInfo.photoIdString(for: id).appending(".HEIC"))
+       }
 }
 
 /// This cell displays a single thumbnail image with its metadata annotated on it.

@@ -30,6 +30,8 @@ struct ModelGridView: View {
     @State private var isLocal = true
     
     @Binding var categories: [Category]
+    
+    @Binding var images: [UIImage]
     var body: some View {
         ZStack {
             Color("altText")
@@ -85,7 +87,7 @@ struct ModelGridView: View {
             
                 ScrollView( showsIndicators: false) {
                     VStack {
-            ForEach(category.items, id: \.id) { item in
+                        ForEach(category.items, id: \.self) { item in
 //                if item.progress == 1 {
              
                     

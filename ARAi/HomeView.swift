@@ -18,7 +18,7 @@ struct HomeView: View {
     //[Item(id: UUID().uuidString, name: "Bannana", description: "It's a fruit!", progress: 0.0, result: Data()), Item(id: UUID().uuidString, name: "Apple", description: "It's a fruit!", progress: 0.0, result: Data()), Item(id: UUID().uuidString, name: "Orange", description: "It's a fruit!", progress: 0.0, result: Data()), Item(id: UUID().uuidString, name: "Blueberries", description: "It's a fruit!", progress: 0.0, result: Data())])
     @ObservedObject var userData: UserData
     @State var entities = [Entity]()
-   
+   @State var images = [UIImage]()
     @Environment(\.presentationMode) private var presentation
     @State var coolDown = false
     var body: some View {
@@ -27,6 +27,13 @@ struct HomeView: View {
         VStack {
             HeaderView( userData: userData, categories: $categories, category: $category)
                 .onChange(of: userData.reload) { value in
+                    images = []
+                    for item in category.items {
+                        do {
+                        images.append(try ((UIImage(contentsOfFile: getDocumentsDirectory().appendingPathComponent(item.id + ".png").path) ?? UIImage(systemName: ""))!))
+                        } catch {
+                        }
+                        }
                     if !coolDown {
                     let url = self.getDocumentsDirectory().appendingPathComponent("categories.txt")
                     do {
@@ -62,6 +69,12 @@ struct HomeView: View {
                 }
                 }
                 .onAppear() {
+                    for item in category.items {
+                        do {
+                        images.append(try ((UIImage(contentsOfFile: getDocumentsDirectory().appendingPathComponent(item.id + ".png").path) ?? UIImage(systemName: "xmark"))!))
+                        } catch {
+                        }
+                        }
                     
                     do {
                         if !getDocumentsDirectory().appendingPathComponent("x.png").isFileURL {
@@ -155,7 +168,7 @@ struct HomeView: View {
                         }
         
                     
-            ModelGridView(category: $category, entities: entities, userData: userData, categories: $categories)
+            ModelGridView(category: $category, entities: entities, userData: userData, categories: $categories, images: $images)
              //  
         } .navigationBarHidden(true)
               //
