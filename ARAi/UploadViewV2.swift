@@ -1790,81 +1790,82 @@ ProgressView(value: progress)
         
         
     }
-    @State private var infos = [RestManager.FileInfo]()
     func uploadMultipleFiles(urls: [PairOfData]) {
-      
-        for i in urls.indices {
-            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i/2)) {
-                infos.removeAll()
            
-            if urls[i].img.lastPathComponent.contains("HEIC") {
-  
-              do {
-                 
-                  let imageFileInfo = RestManager.FileInfo(withFileURL: urls[i].img, filename: String(i) + ".HEIC", name: "uploadedFile", mimetype: "image/HEIC")
-                  infos.append(imageFileInfo)
-              } catch {
-  
-              }
-              } else if urls[i].gravity.lastPathComponent.lowercased().contains("txt") {
-               
-                  do {
+           for i in urls.indices {
+               DispatchQueue.main.asyncAfter(deadline: .now() + Double(i)) {
+
+                   var infos = [RestManager.FileInfo]()
+                 var newURL = self.getDocumentsDirectory().appendingPathComponent(String(i) + ".HEIC")
+               if urls[i].img.lastPathComponent.contains("HEIC") {
+     
+                 do {
+                    // try UIImage(contentsOfFile: urls[i].img.path)?.pngData()!.write(to: newURL)
+                     let imageFileInfo = RestManager.FileInfo(withFileURL: urls[i].img, filename: String(i) + ".HEIC", name: "uploadedFile", mimetype: "image/HEIC")
+                     infos.append(imageFileInfo)
+                 } catch {
+     
+                 }
+                 } else if urls[i].gravity.lastPathComponent.lowercased().contains("txt") {
+                      newURL = self.getDocumentsDirectory().appendingPathComponent(String(i) + ".txt")
+                     do {
+                         try Data(contentsOf: urls[i].gravity).write(to: newURL)
+                         let imageFileInfo = RestManager.FileInfo(withFileURL: newURL, filename: String(i) + ".txt", name: "uploadedFile", mimetype: "text/plain")
+                         infos.append(imageFileInfo)
+                     } catch {
+     
+                     }
+                 } else {
                     
-                      let imageFileInfo = RestManager.FileInfo(withFileURL: urls[i].gravity, filename: String(i) + ".txt", name: "uploadedFile", mimetype: "text/plain")
-                      infos.append(imageFileInfo)
-                  } catch {
-  
-                  }
-              } else {
-                 
-              }
-            upload(files: infos, toURL: URL(string: "https://araiapi.herokuapp.com/multiupload/")) { (success) -> Void in
-                if success {
-    
-    
-                   // captureFolderState.captures = []
-                    //captureFolderState.requestLoad()
-                }
-            }
-          }
-        }
-  
-  
-      }
-  
-  
-  
-  
-  
-  
-      func upload(files: [RestManager.FileInfo], toURL url: URL?, completion: (_ success: Bool) -> Void) {
-          if let uploadURL = url {
-              rest.upload(files: files, toURL: uploadURL, withHttpMethod: .post) { (results, failedFilesList) in
-                  print("HTTP status code:", results.response?.httpStatusCode ?? 0)
-  
-                  if let error = results.error {
-                      print(error)
-                  }
-                  let decoder = JSONDecoder()
-                  if let data = results.data {
-                      do {
-                          let note = try decoder.decode(Print.self, from: data)
-                          prints.append(note)
-                      } catch {
-  
-                      }
-                  }
-  
-                  if let failedFiles = failedFilesList {
-                      for file in failedFiles {
-                          print(file)
-                      }
-                  }
-              }
-          }
-  
-          completion(true)
-      }
+                 }
+               upload(files: infos, toURL: URL(string: "https://araiapi.herokuapp.com/multiupload/")) { (success) -> Void in
+                   if success {
+       
+       
+                      // captureFolderState.captures = []
+                       //captureFolderState.requestLoad()
+                   }
+               }
+             }
+           }
+     
+     
+         }
+     
+     
+     
+     
+     
+     
+         func upload(files: [RestManager.FileInfo], toURL url: URL?, completion: (_ success: Bool) -> Void) {
+             if let uploadURL = url {
+                 rest.upload(files: files, toURL: uploadURL, withHttpMethod: .post) { (results, failedFilesList) in
+                     print("HTTP status code:", results.response?.httpStatusCode ?? 0)
+     
+                     if let error = results.error {
+                         print(error)
+                     }
+                     let decoder = JSONDecoder()
+                     if let data = results.data {
+                         do {
+                             let note = try decoder.decode(Print.self, from: data)
+                             prints.append(note)
+                         } catch {
+     
+                         }
+                     }
+     
+                     if let failedFiles = failedFilesList {
+                         for file in failedFiles {
+                             print(file)
+                         }
+                     }
+                 }
+             }
+     
+             completion(true)
+         }
+     
   
     func getDocumentsDirectory() -> URL {
         // find all possible documents directories for this user

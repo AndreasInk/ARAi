@@ -207,7 +207,7 @@ struct ScanToolbarView: View {
        
                 }
  
-    let imageSuffix: String = ".HEIC"
+    let imageSuffix: String = ".png"
     func imageUrl(in captureDir: URL, id: UInt32) -> URL {
         return captureDir.appendingPathComponent(CaptureInfo.photoIdString(for: id).appending(imageSuffix))
     }
