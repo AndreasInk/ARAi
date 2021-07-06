@@ -1632,7 +1632,7 @@ ProgressView(value: progress)
                      } else {
                          let index = note.queue.firstIndex(where: { $0 == userID })
                          if !prints.map{$0.process}.contains("\(index ?? 0)/\(note.queue.count - 1) in queue") {
-                        
+                       
                          prints.append(Print(id: UUID().uuidString, process: "\(index ?? 0)/\(note.queue.count - 1) in queue"))
                              
                              if  "\(index ?? 0)/\(note.queue.count - 1) in queue" == ("0/-1 in queue")  {
@@ -1793,7 +1793,7 @@ ProgressView(value: progress)
     func uploadMultipleFiles(urls: [PairOfData]) {
       
         for i in urls.indices {
-            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i/5)) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i/2)) {
                 infos.removeAll()
            
             if urls[i].img.lastPathComponent.contains("HEIC") {

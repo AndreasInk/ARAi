@@ -310,7 +310,7 @@ struct ARMenuOverlayView: View {
                     }
                 }
             
-        }
+        } .padding(.vertical)
         } 
             .animation(.spring())
             .transition(.move(edge: .bottom))

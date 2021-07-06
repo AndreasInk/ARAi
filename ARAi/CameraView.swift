@@ -111,49 +111,49 @@ struct CaptureButtonPanelView: View {
                
                
             }
-            HStack {
+           // HStack {
                 
-                Spacer()
-            Button(action: {
-                withAnimation(.easeInOut(duration: 0.5)) {
-                    animate.toggle()
-                }
-                do {
-                let videoDeviceInputOld = try AVCaptureDeviceInput(
-                    device: model.front ? model.getVideoDeviceForPhotogrammetry() :  model.getVideoDeviceForPhotogrammetryFront())
+               // Spacer()
+//            Button(action: {
+//                withAnimation(.easeInOut(duration: 0.5)) {
+//                    animate.toggle()
+//                }
+//                do {
+//                let videoDeviceInputOld = try AVCaptureDeviceInput(
+//                    device: model.front ? model.getVideoDeviceForPhotogrammetry() :  model.getVideoDeviceForPhotogrammetryFront())
+//
+//                model.front.toggle()
+//
+//                    let videoDeviceInput = try AVCaptureDeviceInput(
+//                        device: model.front ? model.getVideoDeviceForPhotogrammetryFront() : model.getVideoDeviceForPhotogrammetry())
+//
+//                    model.session.removeInput(model.videoDeviceInput!)
+//
+//                    if model.session.canAddInput(videoDeviceInput) {
+//
+//                        model.session.addInput(videoDeviceInput)
+//                        model.videoDeviceInput = videoDeviceInput
+//                    } else {
+//                      //  logger.error("Couldn't add video device input to the session.")
+//                      //  setupResult = .configurationFailed
+//                        return
+//                    }
+//                } catch {
+//                   // logger.error("Couldn't create video device input: \(String(describing: error))")
+//                    //setupResult = .configurationFailed
+//                    return
+//                }
+//            }) {
+//                Image(systemName: "camera")
+//                    .font(.largeTitle)
+//                    .foregroundColor(Color.white)
+//
+//                    .cornerRadius(5)
+//                    .rotation3DEffect(.degrees(animate ? 180 : 360), axis: (x: 0, y:  1, z: 0))
+//
+//            }
                 
-                model.front.toggle()
-              
-                    let videoDeviceInput = try AVCaptureDeviceInput(
-                        device: model.front ? model.getVideoDeviceForPhotogrammetryFront() : model.getVideoDeviceForPhotogrammetry())
-                   
-                    model.session.removeInput(model.videoDeviceInput!)
-                   
-                    if model.session.canAddInput(videoDeviceInput) {
-                       
-                        model.session.addInput(videoDeviceInput)
-                        model.videoDeviceInput = videoDeviceInput
-                    } else {
-                      //  logger.error("Couldn't add video device input to the session.")
-                      //  setupResult = .configurationFailed
-                        return
-                    }
-                } catch {
-                   // logger.error("Couldn't create video device input: \(String(describing: error))")
-                    //setupResult = .configurationFailed
-                    return
-                }
-            }) {
-                Image(systemName: "camera")
-                    .font(.largeTitle)
-                    .foregroundColor(Color.white)
-                    
-                    .cornerRadius(5)
-                    .rotation3DEffect(.degrees(animate ? 180 : 360), axis: (x: 0, y:  1, z: 0))
-                
-            }
-                
-            }
+           // }
         } .padding(.trailing)
     }
 }

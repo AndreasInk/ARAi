@@ -238,13 +238,13 @@ struct NewSessionButtonView: View {
                 }) {
                     Label("New Empty Session", systemImage: "camera")
                 }
-                Button(action: {
-                    model.requestNewCaptureFolder()
-                    photoPickerIsPresented = true
-                   
-                }) {
-                    Label("Session From Photos", systemImage: "photo")
-                }
+//                Button(action: {
+//                    model.requestNewCaptureFolder()
+//                    photoPickerIsPresented = true
+//
+//                }) {
+//                    Label("Session From Photos", systemImage: "photo")
+//                }
             }, label: {
                 Image(systemName: "plus.circle")
             })
