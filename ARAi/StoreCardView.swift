@@ -110,13 +110,14 @@ struct StoreCardView: View {
                             case .success(let purchase):
                                 print("Purchase Success: \(purchase.productId)")
                                 #warning("add file with firebase")
+                            
                                 success = true
                                 userData.scans += 3
                             case .error(let error):
                                 switch error.code {
                                 case .unknown: print("Unknown error. Please contact support")
                                 case .clientInvalid: print("Not allowed to make the payment")
-                                case .paymentCancelled: break
+                                case .paymentCancelled: print("Not allowed to make the payment")
                                 case .paymentInvalid: print("The purchase identifier was invalid")
                                 case .paymentNotAllowed: print("The device is not allowed to make the payment")
                                 case .storeProductNotAvailable: print("The product is not available in the current storefront")
@@ -152,7 +153,7 @@ struct StoreCardView: View {
                             case .success(let purchase):
                                 print("Purchase Success: \(purchase.productId)")
                                 success = true
-                                userData.scans += 5
+                                userData.scans += 10
                             case .error(let error):
                                 switch error.code {
                                 case .unknown: print("Unknown error. Please contact support")
@@ -197,7 +198,7 @@ struct StoreCardView: View {
                             .padding()
                         
                         if text == "Support Andreas" {
-                            Text("Since you gave me an energy drink, here are three five scans!")
+                            Text("Since you gave me an energy drink, here are ten downloads!")
                                 .font(.custom("Karla-Medium", size: 32, relativeTo: .headline))
                                 .multilineTextAlignment(.center)
                                 .padding()

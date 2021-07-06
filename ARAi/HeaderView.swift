@@ -12,23 +12,25 @@ struct HeaderView: View {
     @ObservedObject var userData: UserData
     @State private var instruct = false
     @State private var camera = false
+    @State private var shop = false
     @Binding var categories: [Category]
     @Binding var category: Category
     var body: some View {
         HStack {
-            NavigationLink(destination: StoreView(userData: userData, categories: categories)) {
-                
+            Button(action: {
+                shop = true
+               
+                    
+                    
+            }) {
                 LinearGradient.lairHorizontalDark
                   .mask(Image("shop").resizable().scaledToFit().padding())
                   
                   .frame(width: 75, height: 75)
-                    
-                    
-                    
-                    
+            }
                     
                    
-        }
+        
             Spacer()
             Button(action: {
                 camera = true
@@ -79,6 +81,9 @@ struct HeaderView: View {
                     }
             }
         } .padding()
+            .sheet(isPresented: $shop) {
+                StoreView(userData: userData, categories: categories)
+            }
 }
     func getDocumentsDirectory() -> URL {
         // find all possible documents directories for this user

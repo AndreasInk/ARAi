@@ -45,7 +45,7 @@ struct StoreView: View {
 //                    StoreCardView(title: "One Free Scan", text: "Unlock", price: 0.00, image: "working", audioName: "", userData: userData, model: model)
 //                   
                 }
-                StoreCardView(title: "One Downloads", text: "Buy", price: 0.99, image: "working", audioName: "", userData: userData, categories: categories)
+                StoreCardView(title: "One Download", text: "Buy", price: 0.99, image: "working", audioName: "", userData: userData, categories: categories)
                    
                 StoreCardView(title: "Three Downloads", text: "Buy", price: 1.99, image: "working", audioName: "", userData: userData, categories: categories)
                    
