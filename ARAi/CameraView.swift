@@ -95,7 +95,7 @@ struct CaptureButtonPanelView: View {
             HStack {
                 ThumbnailView(model: model, userData: userData)
                     .frame(width: width / 3)
-                    .padding(.horizontal)
+                   
                 Spacer()
             }
             HStack {
@@ -107,7 +107,7 @@ struct CaptureButtonPanelView: View {
                 Spacer()
                 CaptureModeButton(model: model,
                                   frameWidth: width / 3)
-                    .padding(.horizontal)
+                 
                
                
             }
@@ -154,7 +154,7 @@ struct CaptureButtonPanelView: View {
 //            }
                 
            // }
-        } .padding(.trailing)
+        }  .padding(.horizontal)
     }
 }
 

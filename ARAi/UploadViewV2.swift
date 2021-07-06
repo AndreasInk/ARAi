@@ -1658,7 +1658,7 @@ ProgressView(value: progress)
     func getLogs() {
         let url2 = URL(string: "https://araiapi.herokuapp.com/getLogs")
         
-        guard let requestUrl = url2 else { fatalError() }
+        if let requestUrl = url2 {
         // Prepare URL Request Object
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "GET"
@@ -1703,6 +1703,7 @@ ProgressView(value: progress)
                 }
             } .resume()
           
+        }
         }
         
     }
