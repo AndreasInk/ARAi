@@ -53,6 +53,7 @@ class CaptureFolderState: ObservableObject {
             }
             DispatchQueue.main.async {
                 self.captures.removeAll(where: { $0.id == captureInfo.id })
+                self.requestLoadCaptureInfo()
             }
         }
     }

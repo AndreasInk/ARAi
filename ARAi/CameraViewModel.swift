@@ -389,7 +389,7 @@ class CameraViewModel: ObservableObject {
                     && photoSettings.photoQualityPrioritization == .quality
             }
 
-            self.photoId = UInt32((self.captureFolderState?.captures.count ?? 0) + 1)
+            self.photoId = UInt32((lastCapture?.id ?? 0) + 1)
             let photoCaptureProcessor = self.makeNewPhotoCaptureProcessor(photoId: self.photoId,
                                                                           photoSettings: photoSettings)
 
