@@ -50,18 +50,21 @@ struct SceneView: UIViewRepresentable {
                             box.firstMaterial?.diffuse.contents = UIColor.black
                             box.firstMaterial?.isDoubleSided = true
                             let boxNode = SCNNode(geometry: box)
-                        boxNode.worldPosition = SCNVector3(vert.x, vert.y, vert.z)
-                        
+                        boxNode.position = SCNVector3(Float.random(in: -1000...1000), Float.random(in: -1000...1000), Float.random(in: -1000...1000))
+                        model.addChildNode(boxNode)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        SCNAction.move(to: SCNVector3(vert.x, vert.y, vert.z), duration: TimeInterval.random(in: 5...60))
+                        }
                         //print(boxNode.position)
                              
-                        model.addChildNode(boxNode)
+                       
                         
                         points.append(POINT3D(x: boxNode.position.x, y: boxNode.position.y, z: boxNode.position.z))
                     }
                    
                 }
                
-                //tvNode!.geometry!.firstMaterial!.normal.contents = nil
+                tvNode!.opacity = 1.0
             } else {
 
                 print("invalid path!")

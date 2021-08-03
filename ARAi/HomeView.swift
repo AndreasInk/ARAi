@@ -9,7 +9,7 @@ import SwiftUI
 import RealityKit
 struct HomeView: View {
     
-    
+    private let videoDataOutputQueue = DispatchQueue(label: "VideoDataOutput", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
     @State private var categories = [Category(id: UUID(), name: "Your Models", description: "", items: [Item](), colors: ["purple", "blue"]), Category(id: UUID(), name: "Food", description: "", items: [Item(id: UUID().uuidString, name: "Burger", description: "", progress: 1.0, result: Data()), Item(id: UUID().uuidString, name: "Pizza", description: "", progress: 1.0, result: Data()), Item(id: UUID().uuidString, name: "Broccoli", description: "", progress: 1.0, result: Data()), Item(id: UUID().uuidString, name: "Banana", description: "", progress: 1.0, result: Data())],  colors: ["red", "purple"]), Category(id: UUID(), name: "2020 Classics", description: "", items: [Item(id: UUID().uuidString, name: "Wipes", description: "", progress: 1.0, result: Data()), Item(id: UUID().uuidString, name: "Toliet-Paper", description: "", progress: 1.0, result: Data())],  colors: ["dark", "darker"])]
     //, Category(id: UUID(), name: "Tech", description: "", items: [Item(id: UUID().uuidString, name: "Microchip", description: "", progress: 1.0, result: Data())])
     
@@ -27,6 +27,7 @@ struct HomeView: View {
         VStack {
             HeaderView( userData: userData, categories: $categories, category: $category)
                 .onChange(of: userData.reload) { value in
+                    videoDataOutputQueue.async {
                     images = []
                     for item in category.items {
                         do {
@@ -66,9 +67,11 @@ struct HomeView: View {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
                             coolDown = false
                         }
+                    }
                 }
                 }
                 .onAppear() {
+                    videoDataOutputQueue.async {
                     for item in category.items {
                         do {
                         images.append(try ((UIImage(contentsOfFile: getDocumentsDirectory().appendingPathComponent(item.id + ".png").path) ?? UIImage(systemName: "xmark"))!))
@@ -143,6 +146,7 @@ struct HomeView: View {
 //                        }
 //                        }
 //                    }
+                    }
                 }
             SearchBarView(categories: $categories, category: $category)
             CategoryView(categories: $categories, pickedCategory: $category, userData: userData)

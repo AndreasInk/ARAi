@@ -1284,10 +1284,10 @@ struct UploadViewV2: View {
     @State private var item = Item(id: UUID().uuidString, name: "", description: "", progress: 0.0, result: Data())
     @State private var progress = 0.0
     @State private var userID = UUID().uuidString
-    
+    @State var queue = Queue(queue: [String]())
     @State  var timer: SimpleTimer
     @State  var timerQueue: SimpleTimer
-    @State var queue = Queue(queue: [String]())
+    
     
     @ObservedObject var userData: UserData
     @ObservedObject var model: CameraViewModel
@@ -1309,6 +1309,8 @@ struct UploadViewV2: View {
     @State var isLocal = true
     
     @State  var id = UUID().uuidString
+    
+    private let videoDataOutputQueue = DispatchQueue(label: "VideoDataOutput", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
     var body: some View {
         ZStack {
             if preload {
@@ -1363,7 +1365,7 @@ struct UploadViewV2: View {
             Button(action: {
                 withAnimation(.easeInOut) {
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                   
+                    videoDataOutputQueue.async {
                         if item.name.isEmpty {
                             showError = true
                         } else {
@@ -1408,7 +1410,7 @@ struct UploadViewV2: View {
                             }
                     }
                     }
-                
+                }
                 
             
             }) {
